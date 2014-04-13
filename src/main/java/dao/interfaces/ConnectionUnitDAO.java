@@ -1,6 +1,7 @@
 package dao.interfaces;
 
 import entity.ConnectionUnit;
+import entity.Node;
 
 import java.util.List;
 
@@ -12,5 +13,6 @@ import java.util.List;
 public interface ConnectionUnitDAO {
 
     List<ConnectionUnit> getListConnectionUnit();
+    List<ConnectionUnit> getConnectionUnitByNode(Node node);
 
 }
