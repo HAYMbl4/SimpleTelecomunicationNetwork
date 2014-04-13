@@ -1,6 +1,9 @@
 package run;
 
+import dao.service.ServiceConnectionUnit;
 import dao.service.ServiceNodeType;
+import entity.Node;
+import entity.NodeType;
 
 /**
  *
@@ -12,14 +15,23 @@ public class TestRunner {
 
     public static void main (String[] args) {
 
-        ServiceNodeType servNodeType = new ServiceNodeType();
-        servNodeType.getListNodeType();
+//        ServiceNodeType servNodeType = new ServiceNodeType();
+//        servNodeType.getListNodeType();
 
 //        ServiceNode servNode = new ServiceNode();
 //        servNode.getListNode();
 
-//        ServiceConnectionUnit servCU = new ServiceConnectionUnit();
+        ServiceConnectionUnit servCU = new ServiceConnectionUnit();
 //        servCU.getListConnectionUnit();
+        NodeType nodeType = new NodeType();
+        nodeType.setNodeTypeId(6L);
+        nodeType.setNodeTypeName("Cross");
+        Node node = new Node();
+        node.setNodeId(2L);
+        node.setNodeName("1000");
+        node.setNodeType(nodeType);
+
+        servCU.getConnectionUnitByNode(node);
 
 //        ServiceConnectionPoint servCP = new ServiceConnectionPoint();
 //        servCP.getConnectionPointList();
