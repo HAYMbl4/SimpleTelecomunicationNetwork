@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<h:body>
+    <!--<h:form>-->
+    <!--<h:outputText value="#{serv.value}" />-->
+    <!--</h:form>-->
+
+    <h:form>
+        <h:dataTable value = "#{servNodeType.listNodeType}" var = "nt">
+            <h:column>
+                <f:facet name = "header">NODE_TYPE_ID</f:facet>
+                #{nt.nodeTypeId}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">NODE_TYPE_NAME</f:facet>
+                #{nt.nodeTypeName} - #{nt.nodeTypeShortName}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h:form>
+        <h:dataTable value = "#{nodeBean.listNode}" var = "n">
+            <h:column>
+                <f:facet name = "header">Наименование узла</f:facet>
+                #{n.nodeType.nodeTypeShortName}#{n.nodeName}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Регион</f:facet>
+                #{n.regionName}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Улица</f:facet>
+                #{n.streetName}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Дом</f:facet>
+                #{n.house}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+</h:body>
+</html>
