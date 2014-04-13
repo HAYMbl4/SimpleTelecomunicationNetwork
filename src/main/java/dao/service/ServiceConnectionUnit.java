@@ -2,6 +2,7 @@ package dao.service;
 
 import dao.interfaces.ConnectionUnitDAO;
 import entity.ConnectionUnit;
+import entity.Node;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,6 +34,25 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
 
         session.flush();
         session.close();
+
+        return cuList;
+    }
+
+    @Override
+    public List<ConnectionUnit> getConnectionUnitByNode(Node node) {
+
+        ServiceConnectionUnit sCU = new ServiceConnectionUnit();
+        Session session = sCU.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        Query query = session.createQuery("from ConnectionUnit where node.nodeId = :nodeId");
+        query.setParameter("nodeId",node.getNodeId());
+        List<ConnectionUnit> cuList = query.list();
+
+        for(ConnectionUnit cuL: cuList) {
+            System.out.println(cuL.toString());
+        }
 
         return cuList;
     }
