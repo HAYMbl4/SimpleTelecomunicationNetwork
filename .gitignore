@@ -1,6 +1,7 @@
 *.class
 lib/*
 out/*
+target/*
 .idea
 
 # Mobile Tools for Java (J2ME)
