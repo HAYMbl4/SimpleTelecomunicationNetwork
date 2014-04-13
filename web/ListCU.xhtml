@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <h:title>Перечень ОКУ для узла (Вывести номер)</h:title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:dataTable value = "#{cuBean.listConnectionUnit}" var = "cu">
+            <h:column>
+                <f:facet name = "header">Узел</f:facet>
+                #{cu.node.nodeName}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Коннектор</f:facet>
+                #{cu.cuNumber}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>
