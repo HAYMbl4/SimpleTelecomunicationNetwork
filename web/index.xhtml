@@ -3,27 +3,28 @@
              xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+    <h:outputStylesheet library = "css" name = "nodeTableStyle.css" />
 </h:head>
 <h:body>
+
     <!--<h:form>-->
-    <!--<h:outputText value="#{serv.value}" />-->
+        <!--<h:dataTable value = "#{servNodeType.listNodeType}" var = "nt">-->
+            <!--<h:column>-->
+                <!--<f:facet name = "header">NODE_TYPE_ID</f:facet>-->
+                <!--#{nt.nodeTypeId}-->
+            <!--</h:column>-->
+            <!--<h:column>-->
+                <!--<f:facet name = "header">NODE_TYPE_NAME</f:facet>-->
+                <!--#{nt.nodeTypeName} - #{nt.nodeTypeShortName}-->
+            <!--</h:column>-->
+        <!--</h:dataTable>-->
     <!--</h:form>-->
 
-    <h:form>
-        <h:dataTable value = "#{servNodeType.listNodeType}" var = "nt">
-            <h:column>
-                <f:facet name = "header">NODE_TYPE_ID</f:facet>
-                #{nt.nodeTypeId}
-            </h:column>
-            <h:column>
-                <f:facet name = "header">NODE_TYPE_NAME</f:facet>
-                #{nt.nodeTypeName} - #{nt.nodeTypeShortName}
-            </h:column>
-        </h:dataTable>
-    </h:form>
-
-    <h:form>
-        <h:dataTable value = "#{nodeBean.listNode}" var = "n">
+    <!--<h:form>-->
+        <h:dataTable value = "#{nodeBean.listNode}" var = "n"
+                     styleClass="order-table"
+                     headerClass="order-table-header"
+                     rowClasses="order-table-odd-row,order-table-even-row">
             <h:column>
                 <f:facet name = "header">Наименование узла</f:facet>
                 #{n.nodeType.nodeTypeShortName}#{n.nodeName}
@@ -41,10 +42,12 @@
                 #{n.house}
             </h:column>
             <h:column>
-                <h:outputLink value = "ListCU.xhtml">Показать ОКУ</h:outputLink>
+                <h:link value = "Показать ОКУ" outcome = "ListCU">
+                    <f:param name = "nodeid" value = "#{n.nodeId}" />
+                </h:link>
             </h:column>
         </h:dataTable>
-    </h:form>
+    <!--</h:form>-->
 
 </h:body>
 </html>
