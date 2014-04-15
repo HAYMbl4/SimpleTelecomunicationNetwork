@@ -13,6 +13,6 @@ import java.util.List;
 public interface ConnectionUnitDAO {
 
     List<ConnectionUnit> getListConnectionUnit();
-    List<ConnectionUnit> getConnectionUnitByNode(Node node);
+    List<ConnectionUnit> getConnectionUnitByNode(Long nodeId);
 
 }
