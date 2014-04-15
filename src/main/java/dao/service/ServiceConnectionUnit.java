@@ -39,7 +39,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
     }
 
     @Override
-    public List<ConnectionUnit> getConnectionUnitByNode(Node node) {
+    public List<ConnectionUnit> getConnectionUnitByNode(Long nodeId) {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
         Session session = sCU.getSessionFactory().openSession();
@@ -47,7 +47,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         session.beginTransaction();
 
         Query query = session.createQuery("from ConnectionUnit where node.nodeId = :nodeId");
-        query.setParameter("nodeId",node.getNodeId());
+        query.setParameter("nodeId",nodeId);
         List<ConnectionUnit> cuList = query.list();
 
         for(ConnectionUnit cuL: cuList) {
