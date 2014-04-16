@@ -38,7 +38,8 @@
 
             <h:column>
                 <f:facet name = "header">Свободно точек</f:facet>
-                не реализованно
+                <f:param name = "cuId" value = "#{cu.cuId}"/>
+                #{cuBean.cntUsedCpByCu}
             </h:column>
 
             <h:column>
