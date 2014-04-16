@@ -2,6 +2,7 @@ package run;
 
 import dao.service.ServiceConnectionUnit;
 import dao.service.ServiceNodeType;
+import dao.service.ServiceStubLink;
 import entity.Node;
 import entity.NodeType;
 
@@ -30,11 +31,16 @@ public class TestRunner {
 //        node.setNodeId(2L);
 //        node.setNodeName("1000");
 //        node.setNodeType(nodeType);
+        servCU.getCntUsedCpByCu(2L);
 
-        servCU.getConnectionUnitByNode(2L);
+//        servCU.getConnectionUnitByNode(2L);
 
 //        ServiceConnectionPoint servCP = new ServiceConnectionPoint();
 //        servCP.getConnectionPointList();
+
+        ServiceStubLink serviceStubLink = new ServiceStubLink();
+
+        serviceStubLink.getStubLinksByCuId(2L);
 
     }
 
