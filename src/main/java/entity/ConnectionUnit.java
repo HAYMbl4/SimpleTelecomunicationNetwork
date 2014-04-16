@@ -20,7 +20,7 @@ public class ConnectionUnit implements Serializable {
     @Column(name = "cu_id")
     private Long cuId;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, targetEntity = Node.class)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = Node.class)
     @JoinColumn(name = "node_id")
     private Node node;
 
