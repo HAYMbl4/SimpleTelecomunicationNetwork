@@ -18,8 +18,11 @@ import java.util.List;
 @RequestScoped
 public class ConnectionUnitBean {
 
-    @ManagedProperty("#{param.nodeid}")
+    @ManagedProperty("#{param.nodeId}")
     private Long nodeId;
+
+    @ManagedProperty("#{param.cuId}")
+    private Long cuId;
 
     public List<ConnectionUnit> getListConnectionUnit() {
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
@@ -39,11 +42,25 @@ public class ConnectionUnitBean {
         return listCU;
     }
 
+    public Long getCntUsedCpByCu () {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        return serviceConnectionUnit.getCntUsedCpByCu(cuId);
+    }
+
     public Long getNodeId() {
         return nodeId;
     }
 
     public void setNodeId(Long nodeId) {
         this.nodeId = nodeId;
+    }
+
+    public Long getCuId() {
+        return cuId;
+    }
+
+    public void setCuId(Long cuId) {
+        this.cuId = cuId;
     }
 }
