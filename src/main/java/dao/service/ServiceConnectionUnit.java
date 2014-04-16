@@ -38,7 +38,6 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cuList;
     }
 
-    @Override
     public List<ConnectionUnit> getConnectionUnitByNode(Long nodeId) {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
@@ -54,7 +53,26 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             System.out.println(cuL.toString());
         }
 
+        session.flush();
+        session.close();
+
         return cuList;
+    }
+
+    public Long getCntUsedCpByCu(Long cuId) {
+
+        ServiceConnectionUnit sCU = new ServiceConnectionUnit();
+        Session session = sCU.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        Query query = session.createQuery("select count(*) from StubLink where connectionUnit.cuId = :cuId");
+        query.setParameter("cuId",cuId);
+        Long cntUsedCp = (Long) query.iterate().next();
+
+        System.out.println("Количество занятых точек для ОКУ с ID = " + cuId + " равняется: " + cntUsedCp);
+
+        return cntUsedCp;
     }
 
     protected SessionFactory getSessionFactory() {
