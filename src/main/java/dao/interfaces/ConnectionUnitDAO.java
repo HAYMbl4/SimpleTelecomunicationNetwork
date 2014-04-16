@@ -14,5 +14,6 @@ public interface ConnectionUnitDAO {
 
     List<ConnectionUnit> getListConnectionUnit();
     List<ConnectionUnit> getConnectionUnitByNode(Long nodeId);
+    Long getCntUsedCpByCu(Long cuId);
 
 }
