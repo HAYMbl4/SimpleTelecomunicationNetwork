@@ -34,6 +34,7 @@
         <mapping class="entity.Node"/>
         <mapping class="entity.ConnectionUnit"/>
         <mapping class="entity.ConnectionPoint"/>
+        <mapping class="entity.StubLink"/>
 
     </session-factory>
 
