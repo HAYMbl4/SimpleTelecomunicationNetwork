@@ -3,20 +3,65 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+    <h:outputStylesheet library = "css" name = "nodeTableStyle.css" />
     <h:title>Перечень ОКУ для узла (Вывести наименование узла)</h:title>
 </h:head>
+
 <h:body>
+
     <h:form>
-        <h:dataTable value = "#{cuBean.connectionUnitByNode}" var = "cu">
+
+        <h:dataTable value = "#{cuBean.connectionUnitByNode}" var = "cu"
+                     styleClass  = "order-table"
+                     headerClass = "order-table-head"
+                     rowClasses  = "order-table-odd-row,order-table-even-row">
+
             <h:column>
                 <f:facet name = "header">Узел</f:facet>
                 #{cu.node.nodeName}
             </h:column>
+
             <h:column>
                 <f:facet name = "header">Коннектор</f:facet>
                 #{cu.cuNumber}
             </h:column>
+
+            <h:column>
+                <f:facet name = "header">Начальная пара</f:facet>
+                #{cu.firstPair}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Кол-во точек</f:facet>
+                #{cu.capacity}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Свободно точек</f:facet>
+                не реализованно
+            </h:column>
+
+            <h:column>
+                <ul>
+                    <li>
+                        <h:link value = "Список точек(-)" outcome = "ListCU"></h:link>
+                    </li>
+                    <li>
+                        <h:link value = "Создать связь(-)" outcome = "ListCU"></h:link>
+                    </li>
+                    <li>
+                        <h:link value = "Редактировать(-)" outcome = "ListCU"></h:link>
+                    </li>
+                    <li>
+                        <h:link value = "Удалить(-)" outcome = "ListCU"></h:link>
+                    </li>
+                </ul>
+            </h:column>
+
         </h:dataTable>
+
     </h:form>
+
 </h:body>
+
 </html>
