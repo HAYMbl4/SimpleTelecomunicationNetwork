@@ -27,7 +27,6 @@ public class ServiceNode implements NodeDAO {
 
         Query query = session.createQuery("from Node");
         List<Node> nodeList = query.list();
-        System.out.println("erge");
         for (Node n: nodeList) {
             System.out.println(n.toString());
         }
