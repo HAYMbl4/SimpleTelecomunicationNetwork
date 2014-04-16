@@ -7,47 +7,57 @@
 </h:head>
 <h:body>
 
-    <!--<h:form>-->
-        <!--<h:dataTable value = "#{servNodeType.listNodeType}" var = "nt">-->
-            <!--<h:column>-->
-                <!--<f:facet name = "header">NODE_TYPE_ID</f:facet>-->
-                <!--#{nt.nodeTypeId}-->
-            <!--</h:column>-->
-            <!--<h:column>-->
-                <!--<f:facet name = "header">NODE_TYPE_NAME</f:facet>-->
-                <!--#{nt.nodeTypeName} - #{nt.nodeTypeShortName}-->
-            <!--</h:column>-->
-        <!--</h:dataTable>-->
-    <!--</h:form>-->
 
-    <!--<h:form>-->
+    <h:form>
+
         <h:dataTable value = "#{nodeBean.listNode}" var = "n"
-                     styleClass="order-table"
-                     headerClass="order-table-header"
-                     rowClasses="order-table-odd-row,order-table-even-row">
+                     styleClass = "order-table"
+                     headerClass = "order-table-header"
+                     rowClasses = "order-table-odd-row,order-table-even-row">
+
             <h:column>
                 <f:facet name = "header">Наименование узла</f:facet>
                 #{n.nodeType.nodeTypeShortName}#{n.nodeName}
             </h:column>
+
             <h:column>
                 <f:facet name = "header">Регион</f:facet>
                 #{n.regionName}
             </h:column>
+
             <h:column>
                 <f:facet name = "header">Улица</f:facet>
                 #{n.streetName}
             </h:column>
+
             <h:column>
                 <f:facet name = "header">Дом</f:facet>
                 #{n.house}
             </h:column>
+
             <h:column>
-                <h:link value = "Показать ОКУ" outcome = "ListCU">
-                    <f:param name = "nodeid" value = "#{n.nodeId}" />
-                </h:link>
+                <ul>
+                <li>
+                    <h:link value = "Показать ОКУ" outcome = "ListCU">
+                        <f:param name = "nodeid" value = "#{n.nodeId}" />
+                    </h:link>
+                </li>
+                <li>
+                    <h:link value = "Показать связи(-)" outcome = "index"></h:link>
+                </li>
+                <li>
+                    <h:link value = "Редактировать(-)" outcome = "index"></h:link>
+                </li>
+                <li>
+                    <h:link value = "Удалить(-)" outcome = "index"></h:link>
+                </li>
+            </ul>
             </h:column>
+
         </h:dataTable>
-    <!--</h:form>-->
+
+    </h:form>
 
 </h:body>
+
 </html>
