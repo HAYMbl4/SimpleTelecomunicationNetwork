@@ -11,35 +11,34 @@
 
     <h:form>
 
-        <h:dataTable value = "#{cuBean.connectionUnitByNode}" var = "cu"
+        <h:dataTable value = "#{cuBean.listConnectionUnitTable}" var = "cu"
                      styleClass  = "order-table"
                      headerClass = "order-table-head"
                      rowClasses  = "order-table-odd-row,order-table-even-row">
 
             <h:column>
                 <f:facet name = "header">Узел</f:facet>
-                #{cu.node.nodeName}
+                #{cu.connectionUnit.node.nodeName}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Коннектор</f:facet>
-                #{cu.cuNumber}
+                #{cu.connectionUnit.cuNumber}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Начальная пара</f:facet>
-                #{cu.firstPair}
+                #{cu.connectionUnit.firstPair}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Кол-во точек</f:facet>
-                #{cu.capacity}
+                #{cu.connectionUnit.capacity}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Свободно точек</f:facet>
-                <f:param name = "cuId" value = "#{cu.cuId}"/>
-                #{cuBean.cntUsedCpByCu}
+                #{cu.freePair}
             </h:column>
 
             <h:column>
