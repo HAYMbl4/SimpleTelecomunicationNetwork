@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "cable_links")
+@Table(name = "cable_link")
 public class CableLinks implements Serializable {
 
     @Id
@@ -23,7 +23,7 @@ public class CableLinks implements Serializable {
     private StubLink stubLink;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, targetEntity = StubLink.class)
-    @JoinColumn(name = "liked_stub_link_id")
+    @JoinColumn(name = "linked_stub_link_id")
     private StubLink linkedStubLink;
 
     public CableLinks() {
