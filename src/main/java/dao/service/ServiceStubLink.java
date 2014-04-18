@@ -37,6 +37,43 @@ public class ServiceStubLink implements StubLinkDAO {
 
     }
 
+    public Long getStubLinkIdByCpId(Long cpId) {
+
+        ServiceStubLink serviceStubLink = new ServiceStubLink();
+        Session session = serviceStubLink.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        Query query = session.createQuery("select stubLinkId from StubLink where connectionPoint.cpId = :cpId");
+        query.setParameter("cpId", cpId);
+        Long stubLinkId = (Long) query.iterate().next();
+        System.out.println("Для точки с ID = " + cpId + " подобран стаб с ID " + stubLinkId);
+
+        session.flush();
+        session.close();
+
+        return stubLinkId;
+    }
+
+    public StubLink getStubLinkByStubLinkId(Long stubLinkId) {
+
+        ServiceStubLink serviceStubLink = new ServiceStubLink();
+        Session session = serviceStubLink.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        Query query = session.createQuery("from StubLink where stubLinkId = :stubLinkId");
+        query.setParameter("stubLinkId",stubLinkId);
+        StubLink stubLink = (StubLink) query.iterate().next();
+
+        System.out.println(stubLink.toString());
+
+        session.flush();
+        session.close();
+
+        return stubLink;
+    }
+
     protected SessionFactory getSessionFactory() {
         return new Configuration().configure().buildSessionFactory();
     }
