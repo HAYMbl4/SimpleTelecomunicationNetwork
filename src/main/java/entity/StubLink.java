@@ -75,6 +75,6 @@ public class StubLink implements Serializable {
     public String toString() {
         return "StubLink { node_id = " + node.getNodeId() + "" +
                 "          cu_id = " + connectionUnit.getCuId() + "" +
-                "          cp_id = " + connectionPoint.getCpId();
+                "          cp_id = " + connectionPoint.getCpId() + "}";
     }
 }
