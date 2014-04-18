@@ -44,7 +44,9 @@
             <h:column>
                 <ul>
                     <li>
-                        <h:link value = "Список точек(-)" outcome = "ListCU"></h:link>
+                        <h:link value = "Список точек" outcome = "ListCPTable">
+                            <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
+                        </h:link>
                     </li>
                     <li>
                         <h:link value = "Создать связь(-)" outcome = "ListCU"></h:link>
