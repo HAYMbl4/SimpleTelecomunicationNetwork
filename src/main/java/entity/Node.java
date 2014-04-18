@@ -23,7 +23,7 @@ public class Node implements Serializable {
     @Column(name = "node_name", nullable = false)
     private String nodeName;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = NodeType.class)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, targetEntity = NodeType.class)
     @JoinColumn(name = "node_type_id")
     private NodeType nodeType;
 
