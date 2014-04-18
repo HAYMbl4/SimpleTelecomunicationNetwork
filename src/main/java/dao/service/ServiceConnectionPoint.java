@@ -18,14 +18,15 @@ import java.util.List;
 
 public class ServiceConnectionPoint implements ConnectionPointDAO {
 
-    public List<ConnectionPoint> getListConnectionPoint() {
+    public List<ConnectionPoint> getListConnectionPointByCuId(Long cuId) {
 
         ServiceConnectionPoint sCP = new ServiceConnectionPoint();
         Session session = sCP.getSessionFactory().openSession();
 
-        session.beginTransaction();
+//        session.beginTransaction();
 
-        Query query = session.createQuery("from ConnectionPoint");
+        Query query = session.createQuery("from ConnectionPoint where connectionUnit.cuId = :cuId");
+        query.setParameter("cuId",cuId);
 
         List<ConnectionPoint> cpList = query.list();
         for (ConnectionPoint cpL: cpList) {

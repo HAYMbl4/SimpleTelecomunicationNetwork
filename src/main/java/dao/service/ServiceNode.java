@@ -23,7 +23,7 @@ public class ServiceNode implements NodeDAO {
         ServiceNode sn = new ServiceNode();
         Session session = sn.getSessionFactory().openSession();
 
-        session.beginTransaction();
+//        session.beginTransaction();
 
         Query query = session.createQuery("from Node");
         List<Node> nodeList = query.list();

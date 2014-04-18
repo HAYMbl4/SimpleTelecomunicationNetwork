@@ -43,7 +43,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
         Session session = sCU.getSessionFactory().openSession();
 
-        session.beginTransaction();
+//        session.beginTransaction();
 
         Query query = session.createQuery("from ConnectionUnit where node.nodeId = :nodeId");
         query.setParameter("nodeId",nodeId);
@@ -64,13 +64,15 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
         Session session = sCU.getSessionFactory().openSession();
 
-        session.beginTransaction();
+//        session.beginTransaction();
 
         Query query = session.createQuery("select count(*) from StubLink where connectionUnit.cuId = :cuId");
         query.setParameter("cuId",cuId);
         Long cntUsedCp = (Long) query.iterate().next();
 
         System.out.println("Количество занятых точек для ОКУ с ID = " + cuId + " равняется: " + cntUsedCp);
+
+        session.close();
 
         return cntUsedCp;
     }
