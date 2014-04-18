@@ -12,5 +12,7 @@ import java.util.List;
 public interface StubLinkDAO {
 
     List<StubLink> getStubLinksByCuId(Long cuId);
+    StubLink getStubLinkByStubLinkId(Long stubLinkId);
+    Long getStubLinkIdByCpId(Long cpId);
 
 }
