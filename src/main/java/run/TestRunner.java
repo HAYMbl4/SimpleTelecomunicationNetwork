@@ -1,5 +1,7 @@
 package run;
 
+import bean.ConnectionPointBean;
+import dao.service.ServiceCableLinks;
 import dao.service.ServiceConnectionUnit;
 import dao.service.ServiceNodeType;
 import dao.service.ServiceStubLink;
@@ -46,8 +48,8 @@ public class TestRunner {
         ServiceStubLink serviceStubLink = new ServiceStubLink();
 
 //        serviceStubLink.getStubLinksByCuId(2L);
-        Long slId = serviceStubLink.getStubLinkIdByCpId(102L);
-        serviceStubLink.getStubLinkByStubLinkId(slId);
+//        Long slId = serviceStubLink.getStubLinkIdByCpId(102L);
+//        serviceStubLink.getStubLinkByStubLinkId(slId);
 
 //        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
 //        List<ConnectionUnit> listCU = new ArrayList<ConnectionUnit>();
@@ -63,7 +65,16 @@ public class TestRunner {
 //        for (ConnectionUnitTable CUTable: listCUTable) {
 //            System.out.println(CUTable.getConnectionUnit().getCuNumber() + " - " + CUTable.getFreePair());
 //        }
+        // //////////////////////////////////////////
+        // cable_links
+        // //////////////////////////////////////////
 
+        ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
+//        serviceCableLinks.getLinkedStubLinkByStubLinkId(2L);
+
+
+        ConnectionPointBean connectionPointBean = new ConnectionPointBean();
+        connectionPointBean.getListConnectionPointTable();
 
     }
 
