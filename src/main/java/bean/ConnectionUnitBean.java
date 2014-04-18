@@ -2,11 +2,13 @@ package bean;
 
 import entity.ConnectionUnit;
 import dao.service.ServiceConnectionUnit;
+import entity.ConnectionUnitTable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,12 +23,21 @@ public class ConnectionUnitBean {
     @ManagedProperty("#{param.nodeId}")
     private Long nodeId;
 
-    @ManagedProperty("#{param.cuId}")
-    private Long cuId;
-
     public List<ConnectionUnit> getListConnectionUnit() {
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
         return serviceConnectionUnit.getListConnectionUnit();
+    }
+
+    public List<ConnectionUnitTable> getListConnectionUnitTable() {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        List<ConnectionUnit> listCU = serviceConnectionUnit.getConnectionUnitByNode(nodeId);
+        List<ConnectionUnitTable> listCUTable = new ArrayList<ConnectionUnitTable>();//todo:поменять на set
+        for (ConnectionUnit lCU: listCU) {
+            Long freePair = lCU.getCapacity() - serviceConnectionUnit.getCntUsedCpByCu(lCU.getCuId());
+            listCUTable.add(new ConnectionUnitTable(lCU,freePair));
+        }
+        return listCUTable;
     }
 
     @PostConstruct
@@ -42,12 +53,6 @@ public class ConnectionUnitBean {
         return listCU;
     }
 
-    public Long getCntUsedCpByCu () {
-
-        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
-        return serviceConnectionUnit.getCntUsedCpByCu(cuId);
-    }
-
     public Long getNodeId() {
         return nodeId;
     }
@@ -56,11 +61,4 @@ public class ConnectionUnitBean {
         this.nodeId = nodeId;
     }
 
-    public Long getCuId() {
-        return cuId;
-    }
-
-    public void setCuId(Long cuId) {
-        this.cuId = cuId;
-    }
 }
