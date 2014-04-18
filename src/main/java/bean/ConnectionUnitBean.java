@@ -40,7 +40,6 @@ public class ConnectionUnitBean {
         return listCUTable;
     }
 
-    @PostConstruct
     public List<ConnectionUnit> getConnectionUnitByNode() {
 
         List<ConnectionUnit> listCU = null;
