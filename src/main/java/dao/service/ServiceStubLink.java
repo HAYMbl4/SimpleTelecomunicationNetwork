@@ -21,7 +21,7 @@ public class ServiceStubLink implements StubLinkDAO {
         ServiceStubLink serviceStubLink = new ServiceStubLink();
         Session session = serviceStubLink.getSessionFactory().openSession();
 
-        session.beginTransaction();
+//        session.beginTransaction();
 
         Query query = session.createQuery("from StubLink where connectionUnit.cuId = :cuId");
         query.setParameter("cuId",cuId);
@@ -30,7 +30,7 @@ public class ServiceStubLink implements StubLinkDAO {
             System.out.println(sl.toString());
         }
 
-        session.flush();
+//        session.flush();
         session.close();
 
         return stubLinkList;
@@ -42,12 +42,17 @@ public class ServiceStubLink implements StubLinkDAO {
         ServiceStubLink serviceStubLink = new ServiceStubLink();
         Session session = serviceStubLink.getSessionFactory().openSession();
 
-        session.beginTransaction();
+//        session.beginTransaction();
 
+        Long stubLinkId;
+        try {
         Query query = session.createQuery("select stubLinkId from StubLink where connectionPoint.cpId = :cpId");
         query.setParameter("cpId", cpId);
-        Long stubLinkId = (Long) query.iterate().next();
+            stubLinkId = (Long) query.iterate().next();
         System.out.println("Для точки с ID = " + cpId + " подобран стаб с ID " + stubLinkId);
+        } catch (Exception ex) {
+            stubLinkId = null;
+        }
 
         session.flush();
         session.close();
