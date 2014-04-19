@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-import entity.StubLink;
+import entity.view.CableLinkTable;
 
 import java.util.List;
 
@@ -12,5 +12,6 @@ import java.util.List;
 public interface CableLinksDAO {
 
     List<Long> getLinkedStubLinkByStubLinkId(Long stubLinkId);
+    List<CableLinkTable> getCableLinksByNodeId(Long nodeId);
 
 }
