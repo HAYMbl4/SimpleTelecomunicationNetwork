@@ -1,7 +1,10 @@
-package entity;
+package entity.mapping;
+
+import entity.mapping.Node;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -12,7 +15,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "node_type")
-public class NodeType implements Serializable{
+public class NodeType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_NODE_TYPE")
@@ -25,6 +28,9 @@ public class NodeType implements Serializable{
 
     @Column(name = "node_type_short_name", nullable = true)
     private String nodeTypeShortName;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "nodeType")
+    private List<Node> nodeList;
 
     public NodeType() {
     }
@@ -53,9 +59,17 @@ public class NodeType implements Serializable{
         this.nodeTypeShortName = nodeTypeShortName;
     }
 
+    public List<Node> getNodeList() {
+        return nodeList;
+    }
+
+    public void setNodeList(List<Node> nodeList) {
+        this.nodeList = nodeList;
+    }
+
     @Override
     public String toString() {
-        return "entity.NodeType{nodeTypeId = " + nodeTypeId + ", nodeTypeName = " + nodeTypeName + ", nodeTypeShortName = " + nodeTypeShortName + "}";
+        return "NodeType {nodeTypeId = " + nodeTypeId + ", nodeTypeName = " + nodeTypeName + ", nodeTypeShortName = " + nodeTypeShortName + "}";
     }
 
 }

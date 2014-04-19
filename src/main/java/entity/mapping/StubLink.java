@@ -1,7 +1,8 @@
-package entity;
+package entity.mapping;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * User: Олег Наумов
@@ -29,6 +30,9 @@ public class StubLink implements Serializable {
     @JoinColumn(name = "cp_id")
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = ConnectionPoint.class)
     private ConnectionPoint connectionPoint;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "stubLink")
+    private List<CableLink> clList;
 
     public StubLink() {
     }
@@ -73,7 +77,8 @@ public class StubLink implements Serializable {
 
     @Override
     public String toString() {
-        return "StubLink { node_id = " + node.getNodeId() + "" +
+        return "StubLink { stub_link_id = " + stubLinkId +
+                "          node_id = " + node.getNodeId() + "" +
                 "          cu_id = " + connectionUnit.getCuId() + "" +
                 "          cp_id = " + connectionPoint.getCpId() + "}";
     }

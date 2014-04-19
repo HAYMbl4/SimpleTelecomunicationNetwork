@@ -1,7 +1,8 @@
-package entity;
+package entity.mapping;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Node implements Serializable {
     @Column(name = "node_name", nullable = false)
     private String nodeName;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, targetEntity = NodeType.class)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = NodeType.class)
     @JoinColumn(name = "node_type_id")
     private NodeType nodeType;
 
@@ -38,6 +39,12 @@ public class Node implements Serializable {
 
     @Column(name = "node_note", nullable = true)
     private String nodeNote;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "node")
+    private List<ConnectionUnit> cuList;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "node")
+    private List<StubLink> slList;
 
     public Node() {
     }

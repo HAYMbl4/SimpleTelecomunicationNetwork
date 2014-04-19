@@ -1,7 +1,8 @@
-package entity;
+package entity.mapping;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -32,6 +33,12 @@ public class ConnectionUnit implements Serializable {
 
     @Column(name = "capacity", nullable = false)
     private Long capacity;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "connectionUnit")
+    private List<ConnectionPoint> cpList;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "connectionUnit")
+    private List<StubLink> slList;
 
     public ConnectionUnit() {
     }
