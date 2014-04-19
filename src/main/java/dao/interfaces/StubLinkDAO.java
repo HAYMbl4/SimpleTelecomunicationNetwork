@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-import entity.StubLink;
+import entity.mapping.StubLink;
 
 import java.util.List;
 
@@ -12,7 +12,8 @@ import java.util.List;
 public interface StubLinkDAO {
 
     List<StubLink> getStubLinksByCuId(Long cuId);
-    StubLink getStubLinkByStubLinkId(Long stubLinkId);
+    List<StubLink> getStubLinkByNodeId(Long nodeId);
     Long getStubLinkIdByCpId(Long cpId);
+    StubLink getStubLinkByStubLinkId(Long stubLinkId);
 
 }
