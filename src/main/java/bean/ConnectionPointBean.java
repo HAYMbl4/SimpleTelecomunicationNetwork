@@ -10,6 +10,7 @@ import entity.mapping.StubLink;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 @ManagedBean(name = "cpBean")
 @RequestScoped
-public class ConnectionPointBean {
+public class ConnectionPointBean implements Serializable {
 
     @ManagedProperty("#{param.cuId}")
     private Long cuId;
