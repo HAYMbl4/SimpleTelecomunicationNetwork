@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-import entity.Node;
+import entity.mapping.Node;
 
 import java.util.List;
 

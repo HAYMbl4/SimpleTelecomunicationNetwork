@@ -1,7 +1,6 @@
 package dao.interfaces;
 
-import entity.ConnectionUnit;
-import entity.Node;
+import entity.mapping.ConnectionUnit;
 
 import java.util.List;
 

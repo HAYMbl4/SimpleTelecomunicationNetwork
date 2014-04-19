@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-import entity.ConnectionPoint;
+import entity.mapping.ConnectionPoint;
 
 import java.util.List;
 
