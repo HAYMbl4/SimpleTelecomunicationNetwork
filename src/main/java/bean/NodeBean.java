@@ -1,9 +1,11 @@
 package bean;
 
 import dao.service.ServiceNode;
-import entity.Node;
+import entity.mapping.Node;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +16,8 @@ import java.util.List;
  */
 
 @ManagedBean(name = "nodeBean")
-public class NodeBean {
+@SessionScoped
+public class NodeBean implements Serializable {
 
     public List<Node> getListNode() {
         ServiceNode serviceNode = new ServiceNode();

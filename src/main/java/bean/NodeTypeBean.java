@@ -1,9 +1,11 @@
 package bean;
 
 import dao.service.ServiceNodeType;
-import entity.NodeType;
+import entity.mapping.NodeType;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +13,8 @@ import java.util.List;
  */
 
 @ManagedBean(name = "servNodeType")
-public class NodeTypeBean {
+@ViewScoped
+public class NodeTypeBean implements Serializable {
 
     public List<NodeType> getListNodeType() {
         ServiceNodeType serviceNodeType = new ServiceNodeType();

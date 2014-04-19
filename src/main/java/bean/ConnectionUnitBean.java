@@ -1,10 +1,9 @@
 package bean;
 
-import entity.ConnectionUnit;
+import entity.mapping.ConnectionUnit;
 import dao.service.ServiceConnectionUnit;
-import entity.ConnectionUnitTable;
+import entity.view.ConnectionUnitTable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;

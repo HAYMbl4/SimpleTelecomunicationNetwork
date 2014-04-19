@@ -3,11 +3,10 @@ package bean;
 import dao.service.ServiceCableLinks;
 import dao.service.ServiceConnectionPoint;
 import dao.service.ServiceStubLink;
-import entity.ConnectionPoint;
-import entity.ConnectionPointTable;
-import entity.StubLink;
+import entity.mapping.ConnectionPoint;
+import entity.view.ConnectionPointTable;
+import entity.mapping.StubLink;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 
 @ManagedBean(name = "cpBean")
-//@RequestScoped
+@RequestScoped
 public class ConnectionPointBean {
 
     @ManagedProperty("#{param.cuId}")
