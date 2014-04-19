@@ -1,8 +1,7 @@
 package dao.service;
 
 import dao.interfaces.ConnectionUnitDAO;
-import entity.ConnectionUnit;
-import entity.Node;
+import entity.mapping.ConnectionUnit;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +23,6 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
         Session session = sCU.getSessionFactory().openSession();
 
-        session.beginTransaction();
 
         Query query = session.createQuery("from ConnectionUnit");
         List<ConnectionUnit> cuList = query.list();
@@ -42,8 +40,6 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
         Session session = sCU.getSessionFactory().openSession();
-
-//        session.beginTransaction();
 
         Query query = session.createQuery("from ConnectionUnit where node.nodeId = :nodeId");
         query.setParameter("nodeId",nodeId);
@@ -63,8 +59,6 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
         Session session = sCU.getSessionFactory().openSession();
-
-//        session.beginTransaction();
 
         Query query = session.createQuery("select count(*) from StubLink where connectionUnit.cuId = :cuId");
         query.setParameter("cuId",cuId);

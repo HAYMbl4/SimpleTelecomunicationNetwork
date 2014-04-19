@@ -1,7 +1,7 @@
 package dao.service;
 
 import dao.interfaces.ConnectionPointDAO;
-import entity.ConnectionPoint;
+import entity.mapping.ConnectionPoint;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,8 +22,6 @@ public class ServiceConnectionPoint implements ConnectionPointDAO {
 
         ServiceConnectionPoint sCP = new ServiceConnectionPoint();
         Session session = sCP.getSessionFactory().openSession();
-
-//        session.beginTransaction();
 
         Query query = session.createQuery("from ConnectionPoint where connectionUnit.cuId = :cuId");
         query.setParameter("cuId",cuId);

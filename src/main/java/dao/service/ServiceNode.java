@@ -1,7 +1,7 @@
 package dao.service;
 
 import dao.interfaces.NodeDAO;
-import entity.Node;
+import entity.mapping.Node;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,8 +22,6 @@ public class ServiceNode implements NodeDAO {
 
         ServiceNode sn = new ServiceNode();
         Session session = sn.getSessionFactory().openSession();
-
-//        session.beginTransaction();
 
         Query query = session.createQuery("from Node");
         List<Node> nodeList = query.list();
