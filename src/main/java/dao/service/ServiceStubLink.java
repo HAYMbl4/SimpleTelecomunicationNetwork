@@ -1,7 +1,7 @@
 package dao.service;
 
 import dao.interfaces.StubLinkDAO;
-import entity.StubLink;
+import entity.mapping.StubLink;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -34,15 +34,30 @@ public class ServiceStubLink implements StubLinkDAO {
         session.close();
 
         return stubLinkList;
+    }
 
+    public List<StubLink> getStubLinkByNodeId(Long nodeId) {
+
+        ServiceStubLink serviceStubLink = new ServiceStubLink();
+        Session session = serviceStubLink.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from StubLink where node.nodeId = :nodeId");
+        query.setParameter("nodeId",nodeId);
+        List<StubLink> stubLinkList = query.list();
+        for (StubLink sl: stubLinkList) {
+            System.out.println(sl.toString());
+        }
+
+        session.flush();
+        session.close();
+
+        return stubLinkList;
     }
 
     public Long getStubLinkIdByCpId(Long cpId) {
 
         ServiceStubLink serviceStubLink = new ServiceStubLink();
         Session session = serviceStubLink.getSessionFactory().openSession();
-
-//        session.beginTransaction();
 
         Long stubLinkId;
         try {
