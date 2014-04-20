@@ -29,7 +29,6 @@ public class ServiceNode implements NodeDAO {
             System.out.println(n.toString());
         }
 
-        session.flush();
         session.close();
 
         return nodeList;

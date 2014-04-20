@@ -48,7 +48,6 @@ public class ServiceStubLink implements StubLinkDAO {
             System.out.println(sl.toString());
         }
 
-        session.flush();
         session.close();
 
         return stubLinkList;
@@ -69,7 +68,6 @@ public class ServiceStubLink implements StubLinkDAO {
             stubLinkId = null;
         }
 
-        session.flush();
         session.close();
 
         return stubLinkId;
@@ -88,7 +86,6 @@ public class ServiceStubLink implements StubLinkDAO {
 
         System.out.println(stubLink.toString());
 
-        session.flush();
         session.close();
 
         return stubLink;

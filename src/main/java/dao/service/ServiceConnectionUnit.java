@@ -30,7 +30,6 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             System.out.println(cuL.toString());
         }
 
-        session.flush();
         session.close();
 
         return cuList;
@@ -49,7 +48,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             System.out.println(cuL.toString());
         }
 
-        session.flush();
+//        session.flush();
         session.close();
 
         return cuList;

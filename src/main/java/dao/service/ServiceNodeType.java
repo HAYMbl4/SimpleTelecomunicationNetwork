@@ -32,7 +32,6 @@ public class ServiceNodeType implements NodeTypeDAO {
             System.out.println(nt.toString());
         }
 
-        session.flush();
         session.close();
 
         return nodeTypeList;

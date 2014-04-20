@@ -31,7 +31,6 @@ public class ServiceConnectionPoint implements ConnectionPointDAO {
             System.out.println(cpL.toString());
         }
 
-        session.flush();
         session.close();
 
         return cpList;

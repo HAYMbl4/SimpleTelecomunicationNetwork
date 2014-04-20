@@ -52,7 +52,7 @@ public class ServiceCableLinks implements CableLinksDAO {
         ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
         Session session = serviceCableLinks.getSessionFactory().openSession();
 
-        List<CableLink> cableLinkList = new ArrayList<CableLink>();
+        List<CableLink> cableLinkList;
         List<CableLinkTable> cableLinkTableList = new ArrayList<CableLinkTable>();
         StubLink stubLink;
         StubLink linkedStubLink;
@@ -62,10 +62,11 @@ public class ServiceCableLinks implements CableLinksDAO {
         List<StubLink> stubLinkList = serviceStubLink.getStubLinkByNodeId(nodeId);
 
         for (StubLink sl: stubLinkList) {
-            Query query = session.createQuery("from CableLink where stubLink.stubLinkId = :stubLinkId");
-            query.setParameter("stubLinkId",sl.getStubLinkId());
+            Query query;
+            query = session.createQuery("from CableLink where stubLink.stubLinkId = :stubLinkId");
+            query.setParameter("stubLinkId", sl.getStubLinkId());
             if (query.list().size() != 0) {
-                cableLinkList.addAll(query.list());
+                cableLinkList = query.list();
                 // передаем данные в контейнер для отображения
                 for (CableLink cl: cableLinkList) {
                     stubLink = cl.getStubLink();
@@ -75,9 +76,9 @@ public class ServiceCableLinks implements CableLinksDAO {
             }
 
             query = session.createQuery("from CableLink where linkedStubLink.stubLinkId = :stubLinkId");
-            query.setParameter("stubLinkId",sl.getStubLinkId());
+            query.setParameter("stubLinkId", sl.getStubLinkId());
             if (query.list().size() != 0) {
-                cableLinkList.addAll(query.list());
+                cableLinkList = query.list();
                 // передаем данные в контейнер для отображения, меняя направление
                 for (CableLink cl: cableLinkList) {
                     stubLink = cl.getLinkedStubLink();
@@ -87,11 +88,12 @@ public class ServiceCableLinks implements CableLinksDAO {
             }
         }
 
-        for (CableLink cl: cableLinkList) {
-            System.out.println(cl.toString());
-        }
-
-        session.flush();
+        // без этого SOUT начинает кидать ошибку "Exception in thread "main" org.hibernate.LazyInitializationException: could not initialize proxy - no Session"
+        // todo: почему???
+        for (CableLinkTable clT: cableLinkTableList) {
+            System.out.println("clTable - " + clT.getStubLink().toString() + " - " + clT.getLinkedStubLink().toString() + clT.getStubLink().getNode().getNodeType().getNodeTypeShortName() + " - " +
+                    clT.getLinkedStubLink().getNode().getNodeType().getNodeTypeShortName());
+        } 
         session.close();
 
         return cableLinkTableList;
