@@ -114,6 +114,22 @@ public class Node implements Serializable {
         this.nodeNote = nodeNote;
     }
 
+    public List<ConnectionUnit> getCuList() {
+        return cuList;
+    }
+
+    public void setCuList(List<ConnectionUnit> cuList) {
+        this.cuList = cuList;
+    }
+
+    public List<StubLink> getSlList() {
+        return slList;
+    }
+
+    public void setSlList(List<StubLink> slList) {
+        this.slList = slList;
+    }
+
     @Override
     public String toString() {
         return "Node { node_id = " + nodeId + "," +
@@ -122,7 +138,7 @@ public class Node implements Serializable {
                 "      region_name = " + regionName + "," +
                 "      street_name = " + streetName + "," +
                 "      house = " + house + "," +
-                "      node_note = " + nodeNote;
+                "      node_note = " + nodeNote + "}";
     }
 
 }
