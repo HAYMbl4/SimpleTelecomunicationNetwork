@@ -90,13 +90,29 @@ public class ConnectionUnit implements Serializable {
         this.capacity = capacity;
     }
 
+    public List<ConnectionPoint> getCpList() {
+        return cpList;
+    }
+
+    public void setCpList(List<ConnectionPoint> cpList) {
+        this.cpList = cpList;
+    }
+
+    public List<StubLink> getSlList() {
+        return slList;
+    }
+
+    public void setSlList(List<StubLink> slList) {
+        this.slList = slList;
+    }
+
     @Override
     public String toString() {
         return "connection_unit {cu_id = " + cuId + "," +
                 "                node_id = " + node.getNodeId() + "("+ node.getNodeType().getNodeTypeShortName() + "" + node.getNodeName() +")," +
                 "                cu_number = " + cuNumber + "," +
                 "                firstPair = " + firstPair + "," +
-                "                capacity = " + capacity;
+                "                capacity = " + capacity + "}";
     }
 
 }
