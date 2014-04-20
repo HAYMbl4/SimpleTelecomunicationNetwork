@@ -85,9 +85,12 @@ public class StubLink implements Serializable {
 
     @Override
     public String toString() {
-        return "StubLink { stub_link_id = " + stubLinkId +
-                "          node_id = " + node.getNodeId() + "" +
-                "          cu_id = " + connectionUnit.getCuId() + "" +
-                "          cp_id = " + connectionPoint.getCpId() + "}";
+        return "StubLink { \n " +
+                "          stub_link_id = " + stubLinkId + "\n" +
+                "          node = " + node.toString() + "\n" +
+                "          node_type = " + node.getNodeType().toString() + "\n" +
+                "          cu = " + connectionUnit.toString() + "\n" +
+                "          cp = " + connectionPoint.toString() + "\n " +
+                "        }";
     }
 }
