@@ -63,11 +63,19 @@ public class ConnectionPoint implements Serializable {
         this.cpName = cpName;
     }
 
+    public List<StubLink> getSlList() {
+        return slList;
+    }
+
+    public void setSlList(List<StubLink> slList) {
+        this.slList = slList;
+    }
+
     @Override
     public String toString() {
-        return "ConnectionPoint{ cp_id = " + cpId + "," +
+        return "ConnectionPoint { cp_id = " + cpId + "," +
                 "                cu_id = " + connectionUnit.getCuId() + "(" + connectionUnit.getNode().getNodeType().getNodeTypeShortName() +
-                                            "" + connectionUnit.getNode().getNodeName() + "-" + connectionUnit.getCuNumber() + ")," +
-                "                cp_name = " + cpName;
+                ""                         + connectionUnit.getNode().getNodeName() + "-" + connectionUnit.getCuNumber() + ")," +
+                "                cp_name = " + cpName + "}";
     }
 }
