@@ -1,4 +1,6 @@
-package entity;
+package entity.view;
+
+import entity.mapping.ConnectionPoint;
 
 import java.util.List;
 

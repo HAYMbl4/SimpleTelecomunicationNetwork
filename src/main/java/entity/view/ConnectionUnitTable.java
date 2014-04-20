@@ -1,4 +1,6 @@
-package entity;
+package entity.view;
+
+import entity.mapping.ConnectionUnit;
 
 /**
  * User: Олег Наумов
