@@ -1,17 +1,7 @@
 package run;
 
 import bean.ConnectionPointBean;
-import dao.service.ServiceCableLinks;
-import dao.service.ServiceConnectionUnit;
-import dao.service.ServiceNodeType;
-import dao.service.ServiceStubLink;
-import entity.ConnectionUnit;
-import entity.ConnectionUnitTable;
-import entity.Node;
-import entity.NodeType;
-
-import java.util.ArrayList;
-import java.util.List;
+import dao.service.*;
 
 /**
  *
@@ -23,13 +13,14 @@ public class TestRunner {
 
     public static void main (String[] args) {
 
-//        ServiceNodeType servNodeType = new ServiceNodeType();
+        // //////////////////////////////
+        ServiceNodeType servNodeType = new ServiceNodeType();
 //        servNodeType.getListNodeType();
 
-//        ServiceNode servNode = new ServiceNode();
+        ServiceNode servNode = new ServiceNode();
 //        servNode.getListNode();
 
-        ServiceConnectionUnit servCU = new ServiceConnectionUnit();
+//        ServiceConnectionUnit servCU = new ServiceConnectionUnit();
 //        servCU.getListConnectionUnit();
 //        NodeType nodeType = new NodeType();
 //        nodeType.setNodeTypeId(6L);
@@ -39,7 +30,7 @@ public class TestRunner {
 //        node.setNodeName("1000");
 //        node.setNodeType(nodeType);
 //        servCU.getCntUsedCpByCu(2L);
-
+//
 //        servCU.getConnectionUnitByNode(2L);
 
 //        ServiceConnectionPoint servCP = new ServiceConnectionPoint();
@@ -65,6 +56,9 @@ public class TestRunner {
 //        for (ConnectionUnitTable CUTable: listCUTable) {
 //            System.out.println(CUTable.getConnectionUnit().getCuNumber() + " - " + CUTable.getFreePair());
 //        }
+
+//        serviceStubLink.getStubLinkByNodeId(2L);
+
         // //////////////////////////////////////////
         // cable_links
         // //////////////////////////////////////////
@@ -74,7 +68,8 @@ public class TestRunner {
 
 
         ConnectionPointBean connectionPointBean = new ConnectionPointBean();
-        connectionPointBean.getListConnectionPointTable();
+//        connectionPointBean.getListConnectionPointTable();
+        serviceCableLinks.getCableLinksByNodeId(5L);
 
     }
 
