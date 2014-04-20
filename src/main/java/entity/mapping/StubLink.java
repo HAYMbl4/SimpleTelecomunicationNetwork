@@ -75,6 +75,14 @@ public class StubLink implements Serializable {
         this.connectionPoint = connectionPoint;
     }
 
+    public List<CableLink> getClList() {
+        return clList;
+    }
+
+    public void setClList(List<CableLink> clList) {
+        this.clList = clList;
+    }
+
     @Override
     public String toString() {
         return "StubLink { stub_link_id = " + stubLinkId +
