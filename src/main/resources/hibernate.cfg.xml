@@ -14,7 +14,7 @@
         <property name="connection.password">ARGUS_TASK</property>
 
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1000</property>
+        <property name="connection.pool_size">1</property>
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
@@ -30,12 +30,12 @@
 
 
         <!-- Mapping files -->
-        <mapping class="entity.NodeType"/>
-        <mapping class="entity.Node"/>
-        <mapping class="entity.ConnectionUnit"/>
-        <mapping class="entity.ConnectionPoint"/>
-        <mapping class="entity.StubLink"/>
-        <mapping class="entity.CableLinks"/>
+        <mapping class="entity.mapping.NodeType"/>
+        <mapping class="entity.mapping.Node"/>
+        <mapping class="entity.mapping.ConnectionUnit"/>
+        <mapping class="entity.mapping.ConnectionPoint"/>
+        <mapping class="entity.mapping.StubLink"/>
+        <mapping class="entity.mapping.CableLink"/>
 
     </session-factory>
 
