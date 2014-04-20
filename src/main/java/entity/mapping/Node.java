@@ -132,13 +132,15 @@ public class Node implements Serializable {
 
     @Override
     public String toString() {
-        return "Node { node_id = " + nodeId + "," +
-                "      node_name = " + nodeName + "," +
-                "      node_type_id = " + nodeType.getNodeTypeId() + " (" + nodeType.getNodeTypeName() + ")," +
-                "      region_name = " + regionName + "," +
-                "      street_name = " + streetName + "," +
-                "      house = " + house + "," +
-                "      node_note = " + nodeNote + "}";
+        return "Node { \n" +
+                "         node_id = " + nodeId + "\n" +
+                "         node_name = " + nodeName + "\n" +
+                "         nodeType = " + nodeType.toString() + "\n" +
+                "         region_name = " + regionName + "\n" +
+                "         street_name = " + streetName + "\n" +
+                "         house = " + house + "\n" +
+                "         node_note = " + nodeNote + "\n" +
+                "   }";
     }
 
 }
