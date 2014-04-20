@@ -114,8 +114,7 @@ public class ServiceCableLinks implements CableLinksDAO {
         // без этого SOUT начинает кидать ошибку "Exception in thread "main" org.hibernate.LazyInitializationException: could not initialize proxy - no Session"
         // todo: почему???
         for (CableLinkTable clT: cableLinkTableList) {
-            System.out.println("clTable - " + clT.getStubLink().toString() + " - " + clT.getLinkedStubLink().toString() + clT.getStubLink().getNode().getNodeType().getNodeTypeShortName() + " - " +
-                    clT.getLinkedStubLink().getNode().getNodeType().getNodeTypeShortName());
+            System.out.println("От " + clT.getStubLink().toString() + " К " + clT.getLinkedStubLink().toString());
         }
 
         logger.info("----------------------------------------");
