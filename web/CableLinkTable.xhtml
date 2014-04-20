@@ -18,7 +18,7 @@
 
             <h:column>
                 <f:facet name = "header">Узел</f:facet>
-                #{cl.stubLink.node.nodeName}
+                #{cl.stubLink.node.nodeType.nodeTypeShortName}#{cl.stubLink.node.nodeName}
             </h:column>
 
             <h:column>
@@ -43,7 +43,7 @@
 
             <h:column>
                 <f:facet name = "header">Пара</f:facet>
-                #{cl.linkedStubLink.connectionPoint.cpName}
+                #{cl.linkedStubLink.node.nodeType.nodeTypeShortName}#{cl.linkedStubLink.connectionPoint.cpName}
             </h:column>
 
         </h:dataTable>
