@@ -1,6 +1,10 @@
 package bean;
 
 import dao.service.ServiceCableLinks;
+import dao.service.ServiceConnectionUnit;
+import dao.service.ServiceNode;
+import entity.mapping.ConnectionUnit;
+import entity.mapping.Node;
 import entity.view.CableLinkTable;
 
 import javax.faces.bean.ManagedBean;
@@ -21,10 +25,32 @@ public class CableLinkBean implements Serializable {
     @ManagedProperty("#{param.nodeId}")
     private Long nodeId;
 
+    @ManagedProperty("#{param.cuId}")
+    private Long cuId;
+
     public List<CableLinkTable> getListCableLinkByNode() {
         ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
-        System.out.println("Получаем подключения по ID = " + nodeId);
+        System.out.println("Получаем подключения, для узла, по ID = " + nodeId);
         return serviceCableLinks.getCableLinksByNodeId(nodeId);
+    }
+
+    public List<CableLinkTable> getListCableLinkByCu() {
+        ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
+        System.out.println("Получаем подключения, для ОКУ, по ID = " + cuId);
+        return serviceCableLinks.getCableLinksByCuId(cuId);
+    }
+
+    public String getNodeNameById() {
+        ServiceNode serviceNode = new ServiceNode();
+        Node node = serviceNode.getNodeById(nodeId);
+        return node.getNodeType().getNodeTypeShortName()+node.getNodeName();
+    }
+
+    public String getCuNameById() {
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        ConnectionUnit connectionUnit = serviceConnectionUnit.getCuByCuId(cuId);
+        return connectionUnit.getNode().getNodeType().getNodeTypeShortName() + connectionUnit.getNode().getNodeName() + "-" +
+                connectionUnit.getCuNumber();
     }
 
     public Long getNodeId() {
@@ -34,4 +60,13 @@ public class CableLinkBean implements Serializable {
     public void setNodeId(Long nodeId) {
         this.nodeId = nodeId;
     }
+
+    public Long getCuId() {
+        return cuId;
+    }
+
+    public void setCuId(Long cuId) {
+        this.cuId = cuId;
+    }
+
 }
