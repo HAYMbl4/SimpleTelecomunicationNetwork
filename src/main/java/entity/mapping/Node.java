@@ -40,12 +40,6 @@ public class Node implements Serializable {
     @Column(name = "node_note", nullable = true)
     private String nodeNote;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "node")
-    private List<ConnectionUnit> cuList;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "node")
-    private List<StubLink> slList;
-
     public Node() {
     }
 
@@ -112,22 +106,6 @@ public class Node implements Serializable {
 
     public void setNodeNote(String nodeNote) {
         this.nodeNote = nodeNote;
-    }
-
-    public List<ConnectionUnit> getCuList() {
-        return cuList;
-    }
-
-    public void setCuList(List<ConnectionUnit> cuList) {
-        this.cuList = cuList;
-    }
-
-    public List<StubLink> getSlList() {
-        return slList;
-    }
-
-    public void setSlList(List<StubLink> slList) {
-        this.slList = slList;
     }
 
     @Override

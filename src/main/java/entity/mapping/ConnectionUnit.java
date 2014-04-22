@@ -34,12 +34,6 @@ public class ConnectionUnit implements Serializable {
     @Column(name = "capacity", nullable = false)
     private Long capacity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "connectionUnit")
-    private List<ConnectionPoint> cpList;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "connectionUnit")
-    private List<StubLink> slList;
-
     public ConnectionUnit() {
     }
 
@@ -88,22 +82,6 @@ public class ConnectionUnit implements Serializable {
 
     public void setCapacity(Long capacity) {
         this.capacity = capacity;
-    }
-
-    public List<ConnectionPoint> getCpList() {
-        return cpList;
-    }
-
-    public void setCpList(List<ConnectionPoint> cpList) {
-        this.cpList = cpList;
-    }
-
-    public List<StubLink> getSlList() {
-        return slList;
-    }
-
-    public void setSlList(List<StubLink> slList) {
-        this.slList = slList;
     }
 
     @Override

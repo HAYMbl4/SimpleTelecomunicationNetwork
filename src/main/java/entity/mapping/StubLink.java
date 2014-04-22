@@ -31,9 +31,6 @@ public class StubLink implements Serializable {
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = ConnectionPoint.class)
     private ConnectionPoint connectionPoint;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "stubLink")
-    private List<CableLink> clList;
-
     public StubLink() {
     }
 
@@ -73,14 +70,6 @@ public class StubLink implements Serializable {
 
     public void setConnectionPoint(ConnectionPoint connectionPoint) {
         this.connectionPoint = connectionPoint;
-    }
-
-    public List<CableLink> getClList() {
-        return clList;
-    }
-
-    public void setClList(List<CableLink> clList) {
-        this.clList = clList;
     }
 
     @Override

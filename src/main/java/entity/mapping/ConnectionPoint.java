@@ -28,9 +28,6 @@ public class ConnectionPoint implements Serializable {
     @Column(name = "cp_name", nullable = false)
     private Long cpName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "connectionPoint")
-    private List<StubLink> slList;
-
     public ConnectionPoint() {
     }
 
@@ -61,14 +58,6 @@ public class ConnectionPoint implements Serializable {
 
     public void setCpName(Long cpName) {
         this.cpName = cpName;
-    }
-
-    public List<StubLink> getSlList() {
-        return slList;
-    }
-
-    public void setSlList(List<StubLink> slList) {
-        this.slList = slList;
     }
 
     @Override
