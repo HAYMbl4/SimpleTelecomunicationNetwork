@@ -2,6 +2,7 @@ package dao.service;
 
 import dao.interfaces.NodeDAO;
 import entity.mapping.Node;
+import entity.mapping.NodeType;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,6 +48,38 @@ public class ServiceNode implements NodeDAO {
         session.close();
 
         return nodeList;
+    }
+
+    public List<Node> getNodeByNodeTypeName(String nodeTypeName) {
+
+        ServiceNodeType serviceNodeType = new ServiceNodeType();
+
+        Session session = serviceNodeType.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from NodeType where nodeTypeName = :nodeTypeName");
+        query.setParameter("nodeTypeName",nodeTypeName);
+        NodeType nodeType = (NodeType) query.iterate().next();
+        List<Node> nodeList = nodeType.getNodeList();
+        for (Node n: nodeList) {
+            System.out.println(n.toString());
+        }
+
+        return nodeList;
+    }
+
+    public Node getNodeById(Long nodeId) {
+
+        ServiceNode serviceNode = new ServiceNode();
+
+        Session session = serviceNode.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Node where nodeId = :nodeId");
+        query.setParameter("nodeId", nodeId);
+        Node node = (Node) query.iterate().next();
+        System.out.println(node.toString());
+
+        return node;
+
     }
 
     protected SessionFactory getSessionFactory() {
