@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface CableLinksDAO {
 
-    List<Long> getLinkedStubLinkByStubLinkId(Long stubLinkId);
     List<CableLinkTable> getCableLinksByNodeId(Long nodeId);
+    List<CableLinkTable> getCableLinksByCuId(Long cuId);
 
 }
