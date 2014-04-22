@@ -72,53 +72,6 @@ public class ServiceStubLink implements StubLinkDAO {
         return stubLinkList;
     }
 
-    //todo: пока не используется, но будет нужен, при создании подкючения, возможно при просмотре подключений по точке
-
-    public Long getStubLinkIdByCpId(Long cpId) {
-//
-//        ServiceStubLink serviceStubLink = new ServiceStubLink();
-//
-//        logger.info("----------------------------------------");
-//        logger.trace("Открываем сессию");
-//        Session session = serviceStubLink.getSessionFactory().openSession();
-//
-//        Long stubLinkId;
-//        try {
-//        Query query = session.createQuery("select stubLinkId from StubLink where connectionPoint.cpId = :cpId");
-//        query.setParameter("cpId", cpId);
-//            stubLinkId = (Long) query.iterate().next();
-//        System.out.println("Для точки с ID = " + cpId + " подобран стаб с ID " + stubLinkId);
-//        } catch (Exception ex) {
-//            stubLinkId = null;
-//        }
-//
-//        logger.info("----------------------------------------");
-//        logger.trace("Закрываем сессию");
-//        session.close();
-//
-        return null;
-    }
-
-    // Скорее всего данный метод не понадобится
-
-    public StubLink getStubLinkByStubLinkId(Long stubLinkId) {
-//
-//        ServiceStubLink serviceStubLink = new ServiceStubLink();
-//        Session session = serviceStubLink.getSessionFactory().openSession();
-//
-//        session.beginTransaction();
-//
-//        Query query = session.createQuery("from StubLink where stubLinkId = :stubLinkId");
-//        query.setParameter("stubLinkId",stubLinkId);
-//        StubLink stubLink = (StubLink) query.iterate().next();
-//
-//        System.out.println(stubLink.toString());
-//
-//        session.close();
-//
-        return null;
-    }
-
     protected SessionFactory getSessionFactory() {
         return new Configuration().configure().buildSessionFactory();
     }
