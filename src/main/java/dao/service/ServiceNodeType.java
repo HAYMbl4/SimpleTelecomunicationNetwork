@@ -1,12 +1,14 @@
 package dao.service;
 
 import dao.interfaces.NodeTypeDAO;
+import entity.mapping.Node;
 import entity.mapping.NodeType;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,18 +20,16 @@ import java.util.List;
 
 public class ServiceNodeType implements NodeTypeDAO {
 
-    public List<NodeType> getListNodeType () {
-
-        List<NodeType> nodeTypeList = null;
+    public List<String> getListNodeType () {
 
         ServiceNodeType serviceNodeType = new ServiceNodeType();
 
         Session session = serviceNodeType.getSessionFactory().openSession();
 
-        Query query = session.createQuery("from NodeType");
-        nodeTypeList = query.list();
-        for (NodeType nt: nodeTypeList) {
-            System.out.println(nt.toString());
+        Query query = session.createQuery("select nodeTypeName from NodeType");
+        List<String> nodeTypeList = query.list();
+        for (String nt: nodeTypeList) {
+            System.out.println(nt);
         }
 
         session.close();
