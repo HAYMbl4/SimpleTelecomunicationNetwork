@@ -2,6 +2,7 @@ package dao.service;
 
 import dao.interfaces.ConnectionUnitDAO;
 import entity.mapping.ConnectionUnit;
+import entity.mapping.Node;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -87,6 +88,22 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         session.close();
 
         return cntUsedCp;
+    }
+
+    public ConnectionUnit getCuByCuId(Long cuId) {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+
+        Session session = serviceConnectionUnit.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from ConnectionUnit where cuId = :cuId");
+        query.setParameter("cuId", cuId);
+        ConnectionUnit connectionUnit = (ConnectionUnit) query.iterate().next();
+        System.out.println(connectionUnit.toString());
+
+        session.close();
+
+        return connectionUnit;
     }
 
     protected SessionFactory getSessionFactory() {
