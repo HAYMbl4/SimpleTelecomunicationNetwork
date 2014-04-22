@@ -12,5 +12,6 @@ import java.util.List;
 public interface ConnectionPointDAO {
 
     List<ConnectionPoint> getListConnectionPointByCuId(Long cuId);
+    String usedCp(Long cpId);
 
 }
