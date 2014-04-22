@@ -14,5 +14,7 @@ import java.util.List;
 public interface NodeDAO {
 
     List<Node> getListNode();
+    List<Node> getNodeByNodeTypeName(String nodeTypeName);
+    Node getNodeById(Long nodeId);
 
 }
