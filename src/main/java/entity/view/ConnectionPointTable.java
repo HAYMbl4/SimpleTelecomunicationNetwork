@@ -12,14 +12,14 @@ import java.util.List;
 public class ConnectionPointTable {
 
     public ConnectionPoint connectionPoint;
-    public List<String> linkedCP;
+    public String usedCP;
 
     public ConnectionPointTable() {
     }
 
-    public ConnectionPointTable(ConnectionPoint connectionPoint, List<String> linkedCP) {
+    public ConnectionPointTable(ConnectionPoint connectionPoint, String usedCP) {
         this.connectionPoint = connectionPoint;
-        this.linkedCP = linkedCP;
+        this.usedCP = usedCP;
     }
 
     public ConnectionPoint getConnectionPoint() {
@@ -30,12 +30,6 @@ public class ConnectionPointTable {
         this.connectionPoint = connectionPoint;
     }
 
-    public List<String> getLinkedCP() {
-        return linkedCP;
-    }
 
-    public void setLinkedCP(List<String> linkedCP) {
-        this.linkedCP = linkedCP;
-    }
 
 }
