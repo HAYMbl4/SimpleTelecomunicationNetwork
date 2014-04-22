@@ -1,0 +1,53 @@
+#wrapper {
+   width: 1150px;
+   padding-top: 50px;
+   margin: auto;
+}
+
+#navigate {
+   width: 300px;
+   height: 260px;
+   background-color: #F9F9F9;
+   border: 1px solid #BBBBBB;
+   padding: 10px;
+   float: left;
+}
+
+#nodeInfo {
+   width: 800px;
+   background-color: #F9F9F9;
+   border: 1px solid #BBBBBB;
+   padding: 10px;
+   float: right;
+}
+
+#cuWrapper {
+    width: 800px;
+    padding-top: 50px;
+    margin: auto;
+}
+
+#cuTitle {
+    width: 800px;
+    background-color: #F9F9F9;
+    border: 1px solid #BBBBBB;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#cuInfo {
+    width: 800px;
+    background-color: #F9F9F9;
+    border: 1px solid #BBBBBB;
+    padding-top: 50px;
+    padding: 10px;
+    margin: auto;
+}
+
+li {
+    list-style-type: none;
+}
+
+fieldset {
+    border: 1px solid #BBBBBB;
+}
