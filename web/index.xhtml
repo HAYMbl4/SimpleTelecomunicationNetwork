@@ -1,83 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
              xmlns:f="http://java.sun.com/jsf/core"
              xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-
-    <h:outputStylesheet library = "css" name = "nodeTableStyle.css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript">
-
-        $(document).ready(function(){
-            $("#select input[type='checkbox']").click(function(){
-//                $("#NodeName").prop("rendered", false)
-                $('#NodeName ('+$(this).val()+')').rendered("false");
-            });
-        });
-
-    </script>
-
+    <h:outputStylesheet library = "css" name = "tableStyle.css" />
+    <h:outputStylesheet library = "css" name = "block.css" />
 </h:head>
 
 <h:body>
+    <div id = "wrapper">
 
-    <form action="" method="get" id="select">
-        <input name="column" type="checkbox" value="1" checked = "true" />
-    </form>
+            <h:form id = "navigate">
+                <fieldset>
+                    <legend>Параметры выборки:</legend>
+                    Выбрать узлы:
+                    <h:selectOneMenu value="#{nodeBean.nodeTypeValue}">
+                        <f:selectItems value="#{nodeBean.listNodeType}" />
+                    </h:selectOneMenu>
+                <br/>
 
-    <h:form>
+                </fieldset>
+                    <fieldset>
+                    <legend>Отображаемые коллонки</legend>
+                        <table >
+                            <tr>
+                                <td>Тип узла:</td>
+                                <td><h:selectBooleanCheckbox value="#{indexBean.viewNodeType}" /></td>
+                            </tr>
+                            <tr>
+                                <td>Название Узла:</td>
+                                <td><h:selectBooleanCheckbox value="#{indexBean.viewNodeName}" /></td>
+                            </tr>
+                            <tr>
+                                <td>Регион:</td>
+                                <td><h:selectBooleanCheckbox value="#{indexBean.viewRegion}" /></td>
+                            </tr>
+                            <tr>
+                                <td>Адрес:</td>
+                                <td><h:selectBooleanCheckbox value="#{indexBean.viewStreet}" /></td>
+                            </tr>
+                            <tr>
+                                <td>Номер дома:</td>
+                                <td><h:selectBooleanCheckbox value="#{indexBean.viewHouse}" /></td>
+                            </tr>
+                        </table>
+                </fieldset>
 
-        <h:dataTable value = "#{nodeBean.listNode}" var = "n"
-                     styleClass = "order-table"
-                     headerClass = "order-table-header"
-                     rowClasses = "order-table-odd-row,order-table-even-row">
+                <h:commandButton value="Обновить" action="index" />
 
-            <!--rendered="#{nodeBean.showNodeName}"-->
-            <h:column id = "NodeName" >
-                <f:facet name = "header">Наименование узла</f:facet>
-                #{n.nodeType.nodeTypeShortName}#{n.nodeName}
-            </h:column>
+            </h:form>
 
-            <h:column>
-                <f:facet name = "header">Регион</f:facet>
-                #{n.regionName}
-            </h:column>
+            <h:form id = "nodeInfo">
 
-            <h:column>
-                <f:facet name = "header">Улица</f:facet>
-                #{n.streetName}
-            </h:column>
+                <h:dataTable value = "#{nodeBean.listNode}" var = "n"
+                             styleClass = "order-table"
+                             headerClass = "order-table-header"
+                             rowClasses = "order-table-odd-row,order-table-even-row"
+                    >
 
-            <h:column>
-                <f:facet name = "header">Дом</f:facet>
-                #{n.house}
-            </h:column>
 
-            <h:column>
-                <ul>
-                <li>
-                    <h:link value = "Показать ОКУ" outcome = "ListCU">
-                        <f:param name = "nodeId" value = "#{n.nodeId}" />
-                    </h:link>
-                </li>
-                <li>
-                    <h:link value = "Подключения" outcome = "CableLinkTable">
-                        <f:param name = "nodeId" value = "#{n.nodeId}" />
-                    </h:link>
-                </li>
-                <li>
-                    <h:link value = "Редактировать(-)" outcome = "index"></h:link>
-                </li>
-                <li>
-                    <h:link value = "Удалить(-)" outcome = "index"></h:link>
-                </li>
-            </ul>
-            </h:column>
+                    <h:column rendered = "#{indexBean.viewNodeType}">
+                        <f:facet name = "header">Тип узла</f:facet>
+                        #{n.nodeType.nodeTypeName}
+                    </h:column>
 
-        </h:dataTable>
+                    <h:column rendered = "#{indexBean.viewNodeName}">
+                        <f:facet name = "header">Наименование узла</f:facet>
+                        #{n.nodeType.nodeTypeShortName}#{n.nodeName}
+                    </h:column>
 
-    </h:form>
+                    <h:column rendered = "#{indexBean.viewRegion}">
+                        <f:facet name = "header">Регион</f:facet>
+                        #{n.regionName}
+                    </h:column>
 
+                    <h:column rendered = "#{indexBean.viewStreet}">
+                        <f:facet name = "header">Улица</f:facet>
+                        #{n.streetName}
+                    </h:column>
+
+                    <h:column rendered = "#{indexBean.viewHouse}">
+                        <f:facet name = "header">Дом</f:facet>
+                        #{n.house}
+                    </h:column >
+
+                    <h:column>
+                        <ul>
+                            <li>
+                                <h:link value = "Показать ОКУ" outcome = "ListCU">
+                                    <f:param name = "nodeId" value = "#{n.nodeId}" />
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link value = "Подключения" outcome = "NodeCableLink">
+                                    <f:param name = "nodeId" value = "#{n.nodeId}" />
+                                </h:link>
+                            </li>
+                        </ul>
+                    </h:column>
+
+                </h:dataTable>
+
+            </h:form>
+
+    </div>
 </h:body>
 
 </html>
