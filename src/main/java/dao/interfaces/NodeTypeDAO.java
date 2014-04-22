@@ -13,6 +13,6 @@ import java.util.List;
 
 public interface NodeTypeDAO {
 
-    List<NodeType> getListNodeType();
+    List<String> getListNodeType();
 
 }
