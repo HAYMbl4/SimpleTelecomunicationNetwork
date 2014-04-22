@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <h:outputStylesheet library = "css" name = "tableStyle.css" />
+    <h:outputStylesheet library = "css" name = "block.css" />
+</h:head>
+
+<h:body>
+
+    <div id = "cuWrapper">
+
+        <div id = "cuTitle">
+            <h:title>Перечень подключений для узла: #{clBean.nodeNameById}</h:title>
+        </div>
+
+        <h:form id = "cuInfo">
+
+            <h:dataTable value = "#{clBean.listCableLinkByNode}" var = "cl"
+                         styleClass  = "order-table"
+                         headerClass = "order-table-header"
+                         rowClasses  = "order-table-odd-row,order-table-even-row"
+                    >
+
+                <h:column>
+                    <f:facet name = "header">Узел</f:facet>
+                    #{cl.stubLink.node.nodeType.nodeTypeShortName}#{cl.stubLink.node.nodeName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">ОКУ</f:facet>
+                    #{cl.stubLink.connectionUnit.cuNumber}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Пара</f:facet>
+                    #{cl.stubLink.connectionPoint.cpName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Узел</f:facet>
+                    #{cl.linkedStubLink.node.nodeType.nodeTypeShortName}#{cl.linkedStubLink.node.nodeName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">ОКУ</f:facet>
+                    #{cl.linkedStubLink.connectionUnit.cuNumber}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Пара</f:facet>
+                    #{cl.linkedStubLink.connectionPoint.cpName}
+                </h:column>
+
+            </h:dataTable>
+
+        </h:form>
+
+    </div>
+
+</h:body>
+
+</html>
