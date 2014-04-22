@@ -1,7 +1,9 @@
 package bean;
 
+import dao.service.ServiceNode;
 import entity.mapping.ConnectionUnit;
 import dao.service.ServiceConnectionUnit;
+import entity.mapping.Node;
 import entity.view.ConnectionUnitTable;
 
 import javax.faces.bean.ManagedBean;
@@ -32,7 +34,7 @@ public class ConnectionUnitBean implements Serializable {
 
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
         List<ConnectionUnit> listCU = serviceConnectionUnit.getConnectionUnitByNode(nodeId);
-        List<ConnectionUnitTable> listCUTable = new ArrayList<ConnectionUnitTable>();//todo:поменять на set
+        List<ConnectionUnitTable> listCUTable = new ArrayList<ConnectionUnitTable>();
         for (ConnectionUnit lCU: listCU) {
             Long freePair = lCU.getCapacity() - serviceConnectionUnit.getCntUsedCpByCu(lCU.getCuId());
             listCUTable.add(new ConnectionUnitTable(lCU,freePair));
@@ -40,16 +42,10 @@ public class ConnectionUnitBean implements Serializable {
         return listCUTable;
     }
 
-    public List<ConnectionUnit> getConnectionUnitByNode() {
-
-        List<ConnectionUnit> listCU = null;
-
-        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
-        if (nodeId != null) {
-           listCU = serviceConnectionUnit.getConnectionUnitByNode(nodeId);
-        }
-
-        return listCU;
+    public String getNodeNameById() {
+        ServiceNode serviceNode = new ServiceNode();
+        Node node = serviceNode.getNodeById(nodeId);
+        return node.getNodeType().getNodeTypeShortName()+node.getNodeName();
     }
 
     public Long getNodeId() {
