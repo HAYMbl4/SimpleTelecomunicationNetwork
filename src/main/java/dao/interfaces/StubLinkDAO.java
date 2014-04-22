@@ -13,7 +13,5 @@ public interface StubLinkDAO {
 
     List<StubLink> getStubLinksByCuId(Long cuId);
     List<StubLink> getStubLinkByNodeId(Long nodeId);
-    Long getStubLinkIdByCpId(Long cpId);
-    StubLink getStubLinkByStubLinkId(Long stubLinkId);
 
 }
