@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +22,27 @@ import java.util.List;
 
 public class ServiceNodeType implements NodeTypeDAO {
 
+    private static final Logger logger = LoggerFactory.getLogger("progTrace");
+
     public List<String> getListNodeType () {
 
         ServiceNodeType serviceNodeType = new ServiceNodeType();
 
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
         Session session = serviceNodeType.getSessionFactory().openSession();
 
+        logger.info("----------------------------------------");
+        logger.trace("Получаем писок типов узлов: ");
         Query query = session.createQuery("select nodeTypeName from NodeType");
         List<String> nodeTypeList = query.list();
         for (String nt: nodeTypeList) {
+            System.out.println(nt.toString());
             System.out.println(nt);
         }
 
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
         session.close();
 
         return nodeTypeList;

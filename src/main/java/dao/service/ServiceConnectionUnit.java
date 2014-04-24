@@ -26,15 +26,22 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
     public List<ConnectionUnit> getListConnectionUnit () {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
+
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
         Session session = sCU.getSessionFactory().openSession();
 
-
+        logger.info("----------------------------------------");
+        logger.trace("Получаем список всех ОКУ:");
         Query query = session.createQuery("from ConnectionUnit");
         List<ConnectionUnit> cuList = query.list();
         for (ConnectionUnit cuL: cuList) {
+            logger.trace(cuL.toString());
             System.out.println(cuL.toString());
         }
 
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
         session.close();
 
         return cuList;
@@ -94,13 +101,20 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
 
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
 
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
         Session session = serviceConnectionUnit.getSessionFactory().openSession();
 
+        logger.info("----------------------------------------");
+        logger.trace("Получаем ОКУ по ID = " + cuId);
         Query query = session.createQuery("from ConnectionUnit where cuId = :cuId");
         query.setParameter("cuId", cuId);
         ConnectionUnit connectionUnit = (ConnectionUnit) query.iterate().next();
+        logger.trace(connectionUnit.toString());
         System.out.println(connectionUnit.toString());
 
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
         session.close();
 
         return connectionUnit;

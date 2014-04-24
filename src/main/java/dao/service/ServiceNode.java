@@ -25,9 +25,8 @@ public class ServiceNode implements NodeDAO {
 
     public List<Node> getListNode() {
 
-//        Logger logger = Logger.getLogger("progTrace");
-
         ServiceNode sn = new ServiceNode();
+
         logger.info("----------------------------------------");
         logger.trace("Открываем сессию");
         Session session = sn.getSessionFactory().openSession();
@@ -43,6 +42,7 @@ public class ServiceNode implements NodeDAO {
             logger.trace(n.toString());
             System.out.println(n.toString());
         }
+
         logger.info("----------------------------------------");
         logger.trace("Закрываем сессию");
         session.close();
@@ -54,15 +54,24 @@ public class ServiceNode implements NodeDAO {
 
         ServiceNodeType serviceNodeType = new ServiceNodeType();
 
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
         Session session = serviceNodeType.getSessionFactory().openSession();
 
+        logger.info("----------------------------------------");
+        logger.trace("Получаем список узлов по типу: " + nodeTypeName);
         Query query = session.createQuery("from NodeType where nodeTypeName = :nodeTypeName");
         query.setParameter("nodeTypeName",nodeTypeName);
         NodeType nodeType = (NodeType) query.iterate().next();
         List<Node> nodeList = nodeType.getNodeList();
         for (Node n: nodeList) {
+            logger.trace(n.toString());
             System.out.println(n.toString());
         }
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
 
         return nodeList;
     }
@@ -71,12 +80,21 @@ public class ServiceNode implements NodeDAO {
 
         ServiceNode serviceNode = new ServiceNode();
 
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
         Session session = serviceNode.getSessionFactory().openSession();
 
+        logger.info("----------------------------------------");
+        logger.trace("Получаем узел по ID = " + nodeId);
         Query query = session.createQuery("from Node where nodeId = :nodeId");
         query.setParameter("nodeId", nodeId);
         Node node = (Node) query.iterate().next();
+        logger.trace(node.toString());
         System.out.println(node.toString());
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
 
         return node;
 
