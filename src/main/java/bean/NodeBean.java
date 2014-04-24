@@ -33,12 +33,9 @@ public class NodeBean implements Serializable {
 
     public List<Node> getListNode() {
         ServiceNode serviceNode = new ServiceNode();
-        System.out.println("----------------------------------------------------------- " + nodeTypeValue);
         if (!nodeTypeValue.equals("All")) {
-            System.out.println("----------------------------------- hi from not ALL " + nodeTypeValue);
             return serviceNode.getNodeByNodeTypeName(nodeTypeValue);
         } else {
-            System.out.println("------------------------------- hi from ALL " + nodeTypeValue);
             return serviceNode.getListNode();
         }
     }
