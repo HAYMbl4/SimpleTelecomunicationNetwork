@@ -18,12 +18,12 @@ import java.util.List;
 public class NodeType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_NODE_TYPE")
+    @GeneratedValue(generator = "GEN_NODE_TYPE")
     @SequenceGenerator(name = "GEN_NODE_TYPE", sequenceName = "GEN_NODE_TYPE", allocationSize = 1)
     @Column(name = "node_type_id")
     private Long nodeTypeId;
 
-    @Column(name = "node_type_name", nullable = false)
+    @Column(name = "node_type_name", nullable = false, unique = true)
     private String nodeTypeName;
 
     @Column(name = "node_type_short_name", nullable = true)
@@ -33,6 +33,11 @@ public class NodeType implements Serializable {
     private List<Node> nodeList;
 
     public NodeType() {
+    }
+
+    public NodeType(String nodeTypeName, String nodeTypeShortName) {
+        this.nodeTypeName = nodeTypeName;
+        this.nodeTypeShortName = nodeTypeShortName;
     }
 
     public Long getNodeTypeId() {
