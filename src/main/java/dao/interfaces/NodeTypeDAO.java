@@ -14,5 +14,6 @@ import java.util.List;
 public interface NodeTypeDAO {
 
     List<String> getListNodeType();
+    void createNodeType(NodeType nodeType);
 
 }
