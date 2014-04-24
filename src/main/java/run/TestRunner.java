@@ -1,6 +1,5 @@
 package run;
 
-import bean.ConnectionPointBean;
 import dao.service.*;
 
 /**
@@ -19,6 +18,8 @@ public class TestRunner {
 
         ServiceNode servNode = new ServiceNode();
 //        servNode.getListNode();
+
+        servNode.getNodeByNodeTypeName("Case");
 
 //        ServiceConnectionUnit servCU = new ServiceConnectionUnit();
 //        servCU.getListConnectionUnit();
@@ -66,11 +67,8 @@ public class TestRunner {
         ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
 //        serviceCableLinks.getLinkedStubLinkByStubLinkId(2L);
 
+        }
 
-        ConnectionPointBean connectionPointBean = new ConnectionPointBean();
-//        connectionPointBean.getListConnectionPointTable();
-        serviceCableLinks.getCableLinksByNodeId(5L);
-
-    }
+//    }
 
 }
