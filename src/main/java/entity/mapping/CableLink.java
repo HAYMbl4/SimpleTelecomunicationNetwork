@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "cable_link")
+@Table(name = "cable_link", uniqueConstraints = @UniqueConstraint(columnNames = {"stub_link_id", "linked_stub_link_id"}))
 public class CableLink implements Serializable {
 
     @Id
@@ -19,11 +19,11 @@ public class CableLink implements Serializable {
     private Long cableLinksId;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, targetEntity = StubLink.class)
-    @JoinColumn(name = "stub_link_id")
+    @JoinColumn(name = "stub_link_id", nullable = false)
     private StubLink stubLink;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, targetEntity = StubLink.class)
-    @JoinColumn(name = "linked_stub_link_id")
+    @JoinColumn(name = "linked_stub_link_id", nullable = false)
     private StubLink linkedStubLink;
 
     public CableLink() {

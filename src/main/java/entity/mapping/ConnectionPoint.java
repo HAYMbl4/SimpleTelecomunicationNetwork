@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "connection_point")
+@Table(name = "connection_point", uniqueConstraints = @UniqueConstraint(columnNames = {"cu_id", "cp_name"}))
 public class ConnectionPoint implements Serializable {
 
     @Id()
@@ -22,7 +22,7 @@ public class ConnectionPoint implements Serializable {
     private Long cpId;
 
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = ConnectionUnit.class)
-    @JoinColumn(name = "cu_id")
+    @JoinColumn(name = "cu_id", nullable = false)
     private ConnectionUnit connectionUnit;
 
     @Column(name = "cp_name", nullable = false)

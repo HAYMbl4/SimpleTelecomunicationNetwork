@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "connection_unit"/*, uniqueConstraints = @UniqueConstraint(columnNames = {"node_id", "cu_number"})*/)
+@Table(name = "connection_unit", uniqueConstraints = @UniqueConstraint(columnNames = {"node_id", "cu_number"}))
 public class ConnectionUnit implements Serializable {
 
     @Id

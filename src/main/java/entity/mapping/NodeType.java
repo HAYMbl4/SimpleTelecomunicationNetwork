@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "node_type")
+@Table(name = "node_type", uniqueConstraints = @UniqueConstraint(columnNames = {"node_type_name"}))
 public class NodeType implements Serializable {
 
     @Id

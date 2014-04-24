@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "node")
+@Table(name = "node", uniqueConstraints = @UniqueConstraint(columnNames = {"node_type_id", "node_name", "region_name"}))
 public class Node implements Serializable {
 
     @Id
@@ -25,10 +25,10 @@ public class Node implements Serializable {
     private String nodeName;
 
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = NodeType.class)
-    @JoinColumn(name = "node_type_id")
+    @JoinColumn(name = "node_type_id", nullable = false)
     private NodeType nodeType;
 
-    @Column(name = "region_name", nullable = true)
+    @Column(name = "region_name", nullable = false)
     private String regionName;
 
     @Column(name = "street_name", nullable = true)

@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "stub_link")
+@Table(name = "stub_link", uniqueConstraints = @UniqueConstraint(columnNames = {"node_id", "cu_id", "cp_id"}))
 public class StubLink implements Serializable {
 
     @Id
@@ -19,15 +19,15 @@ public class StubLink implements Serializable {
     @Column(name = "stub_link_id")
     private Long stubLinkId;
 
-    @JoinColumn(name = "node_id")
+    @JoinColumn(name = "node_id", nullable = false)
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = Node.class)
     private Node node;
 
-    @JoinColumn(name = "cu_id")
+    @JoinColumn(name = "cu_id", nullable = false)
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = ConnectionUnit.class)
     private ConnectionUnit connectionUnit;
 
-    @JoinColumn(name = "cp_id")
+    @JoinColumn(name = "cp_id", nullable = false)
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = ConnectionPoint.class)
     private ConnectionPoint connectionPoint;
 
