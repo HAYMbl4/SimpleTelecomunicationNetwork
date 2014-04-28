@@ -15,5 +15,6 @@ public interface NodeTypeDAO {
 
     List<String> getListNodeType();
     void createNodeType(NodeType nodeType);
+    NodeType getNodeTypeByName(String nodeTypeName);
 
 }
