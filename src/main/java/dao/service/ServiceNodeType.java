@@ -62,11 +62,34 @@ public class ServiceNodeType implements NodeTypeDAO {
         logger.info("NODE_TYPE_SHORT_NAME = " + nodeType.getNodeTypeShortName());
         session.save(nodeType);
         session.getTransaction().commit();
+        logger.info("----------------------------------------");
         logger.trace("Операция прошла успешно");
         logger.info("----------------------------------------");
         logger.trace("Закрываем сессию");
         session.close();
+    }
 
+    public NodeType getNodeTypeByName(String nodeTypeName) {
+
+        ServiceNodeType serviceNodeType = new ServiceNodeType();
+
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceNodeType.getSessionFactory().openSession();
+
+        logger.info("----------------------------------------");
+        logger.trace("Выполняем выборку на получения типа узла по названию: " + nodeTypeName);
+        Query query = session.createQuery("from NodeType where nodeTypeName = :nodeTypeName");
+        query.setParameter("nodeTypeName", nodeTypeName);
+        NodeType nodeType = (NodeType) query.iterate().next();
+        logger.trace(nodeType.toString());
+        System.out.println(nodeType.toString());
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
+
+        return nodeType;
     }
 
     protected SessionFactory getSessionFactory() {
