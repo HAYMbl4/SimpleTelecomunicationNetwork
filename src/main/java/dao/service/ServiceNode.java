@@ -100,6 +100,29 @@ public class ServiceNode implements NodeDAO {
 
     }
 
+    public void createNode(Node node) {
+
+        ServiceNode serviceNode = new ServiceNode();
+
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceNode.getSessionFactory().openSession();
+        session.beginTransaction();
+        logger.info("----------------------------------------");
+        logger.trace("Создаем запись в таблице NODE, с парметрами: ");
+        logger.info(node.toString());
+        session.save(node);
+        session.getTransaction().commit();
+
+        logger.info("----------------------------------------");
+        logger.trace("Операция прошла успешно");
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
+
+    }
+
     protected SessionFactory getSessionFactory() {
         return new Configuration().configure().buildSessionFactory();
     }
