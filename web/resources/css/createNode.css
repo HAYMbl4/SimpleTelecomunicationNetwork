@@ -1,0 +1,30 @@
+#nodeName {
+    background-color: orangered;
+    color: #9aff6f;
+}
+
+.mastWrite {
+    background-color: #f4ff9d;
+}
+
+.freeWrite {
+    background-color: #6ecbff;
+}
+
+.hideMess{
+    visibility: hidden;
+}
+
+.createNode{
+    width: 812px;
+    background-color: #4cff8d;
+    padding: 4px;
+    text-align: center;
+}
+
+.createNodeError{
+    width: 812px;
+    background-color: #ff696d;
+    padding: 4px;
+    text-align: center;
+}
