@@ -16,7 +16,7 @@ import java.util.List;
 public class Node implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_NODE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_NODE")
     @SequenceGenerator(name = "GEN_NODE", sequenceName = "GEN_NODE", allocationSize = 1)
     @Column(name = "node_id")
     private Long nodeId;
