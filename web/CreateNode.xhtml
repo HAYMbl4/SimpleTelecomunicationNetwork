@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+     >
+
+<h:head>
+    <h:outputStylesheet library = "css" name = "block.css" />
+    <h:outputStylesheet library = "css" name = "createNode.css" />
+</h:head>
+
+<h:body>
+
+<div id = "cuWrapper">
+
+    <h:form class = "#{nodeBean.styleMess}" >
+        <h:outputText value="#{nodeBean.resoultMess}" /> (
+        <h:link value = "К списку узлов" outcome = "index" /> )
+    </h:form>
+
+    <h:form id = "cuInfo">
+
+        <fieldset>
+        <legend>Узел: </legend>
+            <table>
+                <tr>
+                    <td>Выберите тип узла:</td>
+                        <td><h:selectOneMenu value = "#{nodeBean.nodeTypeValue}">
+                        <f:selectItems value = "#{nodeBean.listNodeTypeForCreate}" />
+                    </h:selectOneMenu></td>
+                </tr>
+                <tr>
+                    <td>Наименование узла:</td>
+                    <td><h:inputText styleClass = "mastWrite" value = "#{nodeBean.nodeName}" label = "nodeName" required = "true">
+                        <f:validateLength minimum = "1" maximum = "128" />
+                    </h:inputText></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+        <legend>Расположение: </legend>
+            <table>
+                <tr>
+                    <td>Регион:</td>
+                    <td><h:inputText styleClass = "mastWrite" value="#{nodeBean.region}" label="region" required="true">
+                        <f:validateLength minimum="1" maximum="256" />
+                    </h:inputText></td>
+                </tr>
+
+                <tr>
+                    <td>Улица:</td>
+                    <td><h:inputText styleClass = "freeWrite" value="#{nodeBean.street}" label="street" >
+                        <f:validateLength minimum="0" maximum="256" />
+                    </h:inputText></td>
+                </tr>
+
+                <tr>
+                    <td>Дом:</td>
+                    <td><h:inputText styleClass = "freeWrite" value="#{nodeBean.house}" label="house" >
+                        <f:validateLength minimum="0" maximum="16" />
+                    </h:inputText></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <p><label>Примечание: <h:inputTextarea id = "nodeNote" value="#{nodeBean.nodeNote}" cols="97" rows="3" /></label></p>
+
+        <h:commandButton value = "Создать" action = "#{nodeBean.createNode}" />
+        <h:commandButton value = "Очистить" action = "#{nodeBean.cleanParam}" />
+
+    </h:form>
+
+</div>
+
+</h:body>
+
+</html>
