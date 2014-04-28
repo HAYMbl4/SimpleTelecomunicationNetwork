@@ -51,3 +51,7 @@ li {
 fieldset {
     border: 1px solid #BBBBBB;
 }
+
+body {
+    background: cornsilk;
+}
