@@ -16,5 +16,6 @@ public interface NodeDAO {
     List<Node> getListNode();
     List<Node> getNodeByNodeTypeName(String nodeTypeName);
     Node getNodeById(Long nodeId);
+    void createNode(Node node);
 
 }
