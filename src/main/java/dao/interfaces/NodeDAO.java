@@ -17,5 +17,6 @@ public interface NodeDAO {
     List<Node> getNodeByNodeTypeName(String nodeTypeName);
     Node getNodeById(Long nodeId);
     void createNode(Node node);
+    void deleteNode(Node node);
 
 }
