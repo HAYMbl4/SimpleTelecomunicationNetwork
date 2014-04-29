@@ -100,6 +100,9 @@
                             <li>
                                 <h:link value = "Создать узел" outcome = "CreateNode" />
                             </li>
+                            <li>
+                                <h:commandLink value="Удалить" action="#{nodeBean.deleteNode(n)}" />
+                            </li>
                         </ul>
                     </h:column>
 

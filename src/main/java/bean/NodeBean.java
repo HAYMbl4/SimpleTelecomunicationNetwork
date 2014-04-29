@@ -75,6 +75,13 @@ public class NodeBean implements Serializable {
         System.out.println(resoultMess);
     }
 
+    public void deleteNode(Node node) {
+
+        ServiceNode serviceNode = new ServiceNode();
+        serviceNode.deleteNode(node);
+
+    }
+
     public void cleanParam() {
         nodeName = "";
         region = "";
