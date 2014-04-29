@@ -69,6 +69,7 @@ public class ServiceNodeType implements NodeTypeDAO {
         session.close();
     }
 
+    // используется в nodeBean для получения объекта "тип узла", для создания узла
     public NodeType getNodeTypeByName(String nodeTypeName) {
 
         ServiceNodeType serviceNodeType = new ServiceNodeType();

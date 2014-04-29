@@ -20,6 +20,7 @@ public class ServiceStubLink implements StubLinkDAO {
 
     private static final Logger logger = LoggerFactory.getLogger("progTrace");
 
+    // используется в ServiceCableLinks, для получения списка стабов по конкретному ОКУ
     public List<StubLink> getStubLinksByCuId(Long cuId) {
 
         ServiceStubLink serviceStubLink = new ServiceStubLink();
@@ -46,6 +47,7 @@ public class ServiceStubLink implements StubLinkDAO {
         return stubLinkList;
     }
 
+    // используется в ServiceCableLinks, для получения списка стабов по конкретному узлу
     public List<StubLink> getStubLinkByNodeId(Long nodeId) {
 
         ServiceStubLink serviceStubLink = new ServiceStubLink();

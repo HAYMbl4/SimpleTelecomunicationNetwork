@@ -47,6 +47,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cuList;
     }
 
+    // используется в cuBean для получения списка ОКУ по конкретному узлу
     public List<ConnectionUnit> getConnectionUnitByNode(Long nodeId) {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
@@ -72,6 +73,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cuList;
     }
 
+    // используется в cuBean, для получения кол-ва используемых в ОКУ точек
     public Long getCntUsedCpByCu(Long cuId) {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
@@ -97,6 +99,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cntUsedCp;
     }
 
+    // используется в clBean, для формирования наименования ОКУ, по которому выбираются подключения
     public ConnectionUnit getCuByCuId(Long cuId) {
 
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();

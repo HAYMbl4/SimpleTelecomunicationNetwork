@@ -23,6 +23,7 @@ public class ServiceNode implements NodeDAO {
 
     private static final Logger logger = LoggerFactory.getLogger("progTrace");
 
+    // Используется в nodeBean, для получения списка узлов, когда выбран параметр "All"
     public List<Node> getListNode() {
 
         ServiceNode sn = new ServiceNode();
@@ -50,6 +51,7 @@ public class ServiceNode implements NodeDAO {
         return nodeList;
     }
 
+    // Используется в nodeBean, для получения списка узлов, по конкретному типу узла
     public List<Node> getNodeByNodeTypeName(String nodeTypeName) {
 
         ServiceNodeType serviceNodeType = new ServiceNodeType();
@@ -76,6 +78,7 @@ public class ServiceNode implements NodeDAO {
         return nodeList;
     }
 
+    // используется в cuBean, для формирования Наименования узла
     public Node getNodeById(Long nodeId) {
 
         ServiceNode serviceNode = new ServiceNode();
@@ -112,6 +115,29 @@ public class ServiceNode implements NodeDAO {
         logger.trace("Создаем запись в таблице NODE, с парметрами: ");
         logger.info(node.toString());
         session.save(node);
+        session.getTransaction().commit();
+
+        logger.info("----------------------------------------");
+        logger.trace("Операция прошла успешно");
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
+
+    }
+
+    public void deleteNode(Node node) {
+
+        ServiceNode serviceNode = new ServiceNode();
+
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceNode.getSessionFactory().openSession();
+        session.beginTransaction();
+        logger.info("----------------------------------------");
+        logger.trace("Удаляем запись из таблице NODE: ");
+        logger.trace(node.toString());
+        session.delete(node);
         session.getTransaction().commit();
 
         logger.info("----------------------------------------");
