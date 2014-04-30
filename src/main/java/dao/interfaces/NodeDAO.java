@@ -18,5 +18,6 @@ public interface NodeDAO {
     Node getNodeById(Long nodeId);
     void createNode(Node node);
     void deleteNode(Node node);
+    Long cntCUinNode(Long nodeId);
 
 }
