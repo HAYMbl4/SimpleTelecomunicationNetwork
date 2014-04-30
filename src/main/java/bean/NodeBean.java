@@ -31,6 +31,7 @@ public class NodeBean implements Serializable {
     public String nodeNote;
     public String resoultMess;
     public String styleMess = "hideMess";
+    public String delMess;
 
     public List<String> getListNodeType() {
         ServiceNodeType serviceNodeType = new ServiceNodeType();
@@ -78,7 +79,16 @@ public class NodeBean implements Serializable {
     public void deleteNode(Node node) {
 
         ServiceNode serviceNode = new ServiceNode();
-        serviceNode.deleteNode(node);
+        Long cntCu = serviceNode.cntCUinNode(node.getNodeId());
+
+        if (cntCu == 0) {
+            serviceNode.deleteNode(node);
+            delMess = "Узел \"" + node.getNodeType().getNodeTypeShortName() + node.getNodeName() + "\" успешно удален";
+            styleMess = "delNode";
+        } else {
+            delMess = "У узла \"" + node.getNodeType().getNodeTypeShortName() + node.getNodeName() + "\" есть зависимые ОКУ, колличество: " + cntCu;
+            styleMess = "delNodeError";
+        }
 
     }
 
@@ -154,5 +164,13 @@ public class NodeBean implements Serializable {
 
     public void setStyleMess(String styleMess) {
         this.styleMess = styleMess;
+    }
+
+    public String getDelMess() {
+        return delMess;
+    }
+
+    public void setDelMess(String delMess) {
+        this.delMess = delMess;
     }
 }
