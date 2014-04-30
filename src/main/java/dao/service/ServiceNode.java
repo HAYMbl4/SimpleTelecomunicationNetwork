@@ -137,16 +137,44 @@ public class ServiceNode implements NodeDAO {
         logger.info("----------------------------------------");
         logger.trace("Удаляем запись из таблице NODE: ");
         logger.trace(node.toString());
-        session.delete(node);
-        session.getTransaction().commit();
+
+        try {
+            session.delete(node);
+            session.getTransaction().commit();
+            logger.info("----------------------------------------");
+            logger.trace("Операция прошла успешно");
+        } catch (Exception ex) {
+            logger.info("----------------------------------------");
+            logger.trace("Возникла ошибка: ", ex);
+            session.getTransaction().rollback();
+        } finally {
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+        }
+    }
+
+    // используется в nodeBean для проверки наличия у узла ОКУ, перед удалением
+    public Long cntCUinNode(Long nodeId) {
+
+        ServiceNode serviceNode = new ServiceNode();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceNode.getSessionFactory().openSession();
 
         logger.info("----------------------------------------");
-        logger.trace("Операция прошла успешно");
+        logger.trace("Выполняем запрос на получения кол-ва ОКУ, которые есть в узле с ID = " + nodeId);
+        Query query = session.createQuery("select count(*) from ConnectionUnit where node.nodeId = :nodeId");
+        query.setParameter("nodeId", nodeId);
+        Long cntCu = (Long) query.iterate().next();
+        logger.trace("У узла есть " + cntCu + " ОКУ");
+        System.out.println("У узла есть " + cntCu + " ОКУ");
 
         logger.info("----------------------------------------");
         logger.trace("Закрываем сессию");
         session.close();
 
+        return cntCu;
     }
 
     protected SessionFactory getSessionFactory() {
