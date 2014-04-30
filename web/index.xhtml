@@ -6,109 +6,125 @@
 <h:head>
     <h:outputStylesheet library = "css" name = "tableStyle.css" />
     <h:outputStylesheet library = "css" name = "block.css" />
+    <h:outputStylesheet library = "css" name = "createNode.css" />
+    <h:outputScript library = "js" name = "jquery-1.7.1.js" />
+
+    <script type="text/javascript">
+        $(function(){
+            $('#hideMess').click(function(){
+                $(this).fadeOut(1500);
+            });
+        })
+    </script>
+
 </h:head>
 
 <h:body>
     <div id = "wrapper">
 
-            <h:form id = "navigate">
+        <h:form>
+            <h:commandButton class = "styleBut" value = "Создать узел" action = "CreateNode" />
+        </h:form>
+
+        <h:form id = "hideMess" class = "#{nodeBean.styleMess}" >
+            <h:outputText value="#{nodeBean.delMess}" />
+        </h:form>
+
+        <h:form id = "navigate">
+            <fieldset>
+                <legend>Параметры выборки:</legend>
+                Выбрать узлы:
+                <h:selectOneMenu value="#{nodeBean.nodeTypeValue}">
+                    <f:selectItems value="#{nodeBean.listNodeType}" />
+                </h:selectOneMenu>
+            <br/>
+
+            </fieldset>
                 <fieldset>
-                    <legend>Параметры выборки:</legend>
-                    Выбрать узлы:
-                    <h:selectOneMenu value="#{nodeBean.nodeTypeValue}">
-                        <f:selectItems value="#{nodeBean.listNodeType}" />
-                    </h:selectOneMenu>
-                <br/>
+                <legend>Отображаемые коллонки</legend>
+                    <table >
+                        <tr>
+                            <td>Тип узла:</td>
+                            <td><h:selectBooleanCheckbox value="#{indexBean.viewNodeType}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Название Узла:</td>
+                            <td><h:selectBooleanCheckbox value="#{indexBean.viewNodeName}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Регион:</td>
+                            <td><h:selectBooleanCheckbox value="#{indexBean.viewRegion}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Адрес:</td>
+                            <td><h:selectBooleanCheckbox value="#{indexBean.viewStreet}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Номер дома:</td>
+                            <td><h:selectBooleanCheckbox value="#{indexBean.viewHouse}" /></td>
+                        </tr>
+                    </table>
+            </fieldset>
 
-                </fieldset>
-                    <fieldset>
-                    <legend>Отображаемые коллонки</legend>
-                        <table >
-                            <tr>
-                                <td>Тип узла:</td>
-                                <td><h:selectBooleanCheckbox value="#{indexBean.viewNodeType}" /></td>
-                            </tr>
-                            <tr>
-                                <td>Название Узла:</td>
-                                <td><h:selectBooleanCheckbox value="#{indexBean.viewNodeName}" /></td>
-                            </tr>
-                            <tr>
-                                <td>Регион:</td>
-                                <td><h:selectBooleanCheckbox value="#{indexBean.viewRegion}" /></td>
-                            </tr>
-                            <tr>
-                                <td>Адрес:</td>
-                                <td><h:selectBooleanCheckbox value="#{indexBean.viewStreet}" /></td>
-                            </tr>
-                            <tr>
-                                <td>Номер дома:</td>
-                                <td><h:selectBooleanCheckbox value="#{indexBean.viewHouse}" /></td>
-                            </tr>
-                        </table>
-                </fieldset>
+            <h:commandButton value="Обновить" action="index" />
 
-                <h:commandButton value="Обновить" action="index" />
+        </h:form>
 
-            </h:form>
+        <h:form id = "nodeInfo">
 
-            <h:form id = "nodeInfo">
-
-                <h:dataTable value = "#{nodeBean.listNode}" var = "n"
-                             styleClass = "order-table"
-                             headerClass = "order-table-header"
-                             rowClasses = "order-table-odd-row,order-table-even-row"
-                    >
+            <h:dataTable value = "#{nodeBean.listNode}" var = "n"
+                         styleClass = "order-table"
+                         headerClass = "order-table-header"
+                         rowClasses = "order-table-odd-row,order-table-even-row"
+                >
 
 
-                    <h:column rendered = "#{indexBean.viewNodeType}">
-                        <f:facet name = "header">Тип узла</f:facet>
-                        #{n.nodeType.nodeTypeName}
-                    </h:column>
+                <h:column rendered = "#{indexBean.viewNodeType}">
+                    <f:facet name = "header">Тип узла</f:facet>
+                    #{n.nodeType.nodeTypeName}
+                </h:column>
 
-                    <h:column rendered = "#{indexBean.viewNodeName}">
-                        <f:facet name = "header">Наименование узла</f:facet>
-                        #{n.nodeType.nodeTypeShortName}#{n.nodeName}
-                    </h:column>
+                <h:column rendered = "#{indexBean.viewNodeName}">
+                    <f:facet name = "header">Наименование узла</f:facet>
+                    #{n.nodeType.nodeTypeShortName}#{n.nodeName}
+                </h:column>
 
-                    <h:column rendered = "#{indexBean.viewRegion}">
-                        <f:facet name = "header">Регион</f:facet>
-                        #{n.regionName}
-                    </h:column>
+                <h:column rendered = "#{indexBean.viewRegion}">
+                    <f:facet name = "header">Регион</f:facet>
+                    #{n.regionName}
+                </h:column>
 
-                    <h:column rendered = "#{indexBean.viewStreet}">
-                        <f:facet name = "header">Улица</f:facet>
-                        #{n.streetName}
-                    </h:column>
+                <h:column rendered = "#{indexBean.viewStreet}">
+                    <f:facet name = "header">Улица</f:facet>
+                    #{n.streetName}
+                </h:column>
 
-                    <h:column rendered = "#{indexBean.viewHouse}">
-                        <f:facet name = "header">Дом</f:facet>
-                        #{n.house}
-                    </h:column >
+                <h:column rendered = "#{indexBean.viewHouse}">
+                    <f:facet name = "header">Дом</f:facet>
+                    #{n.house}
+                </h:column >
 
-                    <h:column>
-                        <ul>
-                            <li>
-                                <h:link value = "Показать ОКУ" outcome = "ListCU">
-                                    <f:param name = "nodeId" value = "#{n.nodeId}" />
-                                </h:link>
-                            </li>
-                            <li>
-                                <h:link value = "Подключения" outcome = "NodeCableLink">
-                                    <f:param name = "nodeId" value = "#{n.nodeId}" />
-                                </h:link>
-                            </li>
-                            <li>
-                                <h:link value = "Создать узел" outcome = "CreateNode" />
-                            </li>
-                            <li>
-                                <h:commandLink value="Удалить" action="#{nodeBean.deleteNode(n)}" />
-                            </li>
-                        </ul>
-                    </h:column>
+                <h:column>
+                    <ul>
+                        <li>
+                            <h:link value = "Показать ОКУ" outcome = "ListCU">
+                                <f:param name = "nodeId" value = "#{n.nodeId}" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value = "Подключения" outcome = "NodeCableLink">
+                                <f:param name = "nodeId" value = "#{n.nodeId}" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:commandLink value="Удалить" action="#{nodeBean.deleteNode(n)}" />
+                        </li>
+                    </ul>
+                </h:column>
 
-                </h:dataTable>
+            </h:dataTable>
 
-            </h:form>
+        </h:form>
 
     </div>
 </h:body>

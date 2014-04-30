@@ -13,9 +13,12 @@
 
 <div id = "cuWrapper">
 
+    <h:form>
+        <h:commandButton class = "styleBut" value = "К списку узлов" action = "index" />
+    </h:form>
+
     <h:form class = "#{nodeBean.styleMess}" >
-        <h:outputText value="#{nodeBean.resoultMess}" /> (
-        <h:link value = "К списку узлов" outcome = "index" /> )
+        <h:outputText value="#{nodeBean.resoultMess}" />
     </h:form>
 
     <h:form id = "cuInfo">
