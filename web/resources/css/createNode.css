@@ -4,11 +4,11 @@
 }
 
 .mastWrite {
-    background-color: #f4ff9d;
+    background-color: rgba(251, 255, 103, 0.27);
 }
 
 .freeWrite {
-    background-color: #6ecbff;
+    background-color: rgba(110, 203, 255, 0.29);
 }
 
 .hideMess{
@@ -24,6 +24,20 @@
 
 .createNodeError{
     width: 812px;
+    background-color: #ff696d;
+    padding: 4px;
+    text-align: center;
+}
+
+.delNode{
+    width: 1142px;
+    background-color: #4cff8d;
+    padding: 4px;
+    text-align: center;
+}
+
+.delNodeError{
+    width: 1142px;
     background-color: #ff696d;
     padding: 4px;
     text-align: center;
