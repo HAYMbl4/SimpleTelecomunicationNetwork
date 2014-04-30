@@ -8,6 +8,7 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ import java.util.List;
 public class NodeBean implements Serializable {
 
     public String nodeTypeValue = "All";
+    @ManagedProperty("#{param.nodeId}")
+    public Long nodeId;
     public String nodeName;
     public String region;
     public String street;
@@ -76,9 +79,11 @@ public class NodeBean implements Serializable {
         System.out.println(resoultMess);
     }
 
-    public void deleteNode(Node node) {
+    public void deleteNode() {
 
         ServiceNode serviceNode = new ServiceNode();
+        System.out.println("--------------------------------------------------------------------- " + nodeId);
+        Node node = serviceNode.getNodeById(nodeId);
         Long cntCu = serviceNode.cntCUinNode(node.getNodeId());
 
         if (cntCu == 0) {
@@ -172,5 +177,13 @@ public class NodeBean implements Serializable {
 
     public void setDelMess(String delMess) {
         this.delMess = delMess;
+    }
+
+    public Long getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(Long nodeId) {
+        this.nodeId = nodeId;
     }
 }
