@@ -16,7 +16,7 @@ import java.util.List;
 public class ConnectionPoint implements Serializable {
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_CP")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_CP")
     @SequenceGenerator(name = "GEN_CP", sequenceName = "GEN_CP", allocationSize = 1)
     @Column(name = "cp_id")
     private Long cpId;

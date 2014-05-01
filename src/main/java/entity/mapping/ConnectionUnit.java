@@ -16,7 +16,7 @@ import java.util.List;
 public class ConnectionUnit implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_CU")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_CU")
     @SequenceGenerator(name = "GEN_CU", sequenceName = "GEN_CU", allocationSize = 1)
     @Column(name = "cu_id")
     private Long cuId;
