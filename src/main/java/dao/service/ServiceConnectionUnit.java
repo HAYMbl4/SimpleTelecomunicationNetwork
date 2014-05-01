@@ -1,6 +1,7 @@
 package dao.service;
 
 import dao.interfaces.ConnectionUnitDAO;
+import entity.mapping.ConnectionPoint;
 import entity.mapping.ConnectionUnit;
 import entity.mapping.Node;
 import org.hibernate.Query;
@@ -121,6 +122,78 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         session.close();
 
         return connectionUnit;
+    }
+
+    public void createConnectionUnit(ConnectionUnit connectionUnit) {
+
+        Session session = null;
+
+        try {
+            ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+            logger.info("----------------------------------------");
+            logger.trace("Открываем сессию");
+            session = serviceConnectionUnit.getSessionFactory().openSession();
+            session.beginTransaction();
+            logger.info("----------------------------------------");
+            logger.trace("Создаем запись в таблице CONNECTION_UNIT, с параметрами: " + connectionUnit.toString());
+            System.out.println("Создаем запись в таблице CONNECTION_UNIT, с параметрами: " + connectionUnit.toString());
+            session.save(connectionUnit);
+            logger.info("----------------------------------------");
+            logger.trace("Для созданного ОКУ создаем точки:");
+            System.out.println("Для созданного ОКУ создаем точки:");
+            for (Long i = connectionUnit.getFirstPair(); i < connectionUnit.getCapacity(); i++) {
+                ConnectionPoint connectionPoint = new ConnectionPoint(i,connectionUnit);
+                logger.trace(connectionPoint.toString());
+                System.out.println(connectionPoint.toString());
+                session.save(connectionPoint);
+            }
+            session.getTransaction().commit();
+            System.out.println("commit");
+        } catch (Exception ex) {
+            logger.trace("Ошибка при создании ОКУ: ", ex);
+            session.getTransaction().rollback();
+            ex.printStackTrace();
+
+        } finally {
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+        }
+    }
+
+    public void deleteConnectionUnit(ConnectionUnit connectionUnit) {
+
+        Session session = null;
+
+        try {
+            ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+            logger.info("----------------------------------------");
+            logger.trace("Открываем сессию");
+            session = serviceConnectionUnit.getSessionFactory().openSession();
+            session.beginTransaction();
+            logger.info("----------------------------------------");
+            logger.trace("Удаляем точки ОКУ: ");
+            ServiceConnectionPoint serviceConnectionPoint = new ServiceConnectionPoint();
+            List<ConnectionPoint> connectionPointList = serviceConnectionPoint.getListConnectionPointByCuId(connectionUnit.getCuId());
+            for (int i = 0; i < connectionPointList.size(); i++) {
+                logger.trace(connectionPointList.get(i).toString());
+                session.delete(connectionPointList.get(i));
+            }
+            logger.info("----------------------------------------");
+            logger.trace("Удаляем сам коннектор: ");
+            session.delete(connectionUnit);
+            session.getTransaction().commit();
+            logger.info("----------------------------------------");
+            logger.trace("ОКУ удален успешно");
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            logger.trace("При удалении ОКУ возникли ошибки: ", ex);
+        } finally {
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+        }
+
     }
 
     protected SessionFactory getSessionFactory() {
