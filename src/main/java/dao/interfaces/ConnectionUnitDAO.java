@@ -15,5 +15,7 @@ public interface ConnectionUnitDAO {
     List<ConnectionUnit> getConnectionUnitByNode(Long nodeId);
     Long getCntUsedCpByCu(Long cuId);
     ConnectionUnit getCuByCuId(Long cuId);
+    void createConnectionUnit(ConnectionUnit connectionUnit);
+    void deleteConnectionUnit(ConnectionUnit connectionUnit);
 
 }
