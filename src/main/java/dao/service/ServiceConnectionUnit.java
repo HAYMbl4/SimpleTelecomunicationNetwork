@@ -141,7 +141,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             logger.info("----------------------------------------");
             logger.trace("Для созданного ОКУ создаем точки:");
             System.out.println("Для созданного ОКУ создаем точки:");
-            for (Long i = connectionUnit.getFirstPair(); i < connectionUnit.getCapacity(); i++) {
+            for (Long i = connectionUnit.getFirstPair(); i < connectionUnit.getFirstPair() + connectionUnit.getCapacity(); i++) {
                 ConnectionPoint connectionPoint = new ConnectionPoint(i,connectionUnit);
                 logger.trace(connectionPoint.toString());
                 System.out.println(connectionPoint.toString());
@@ -153,7 +153,6 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             logger.trace("Ошибка при создании ОКУ: ", ex);
             session.getTransaction().rollback();
             ex.printStackTrace();
-
         } finally {
             logger.info("----------------------------------------");
             logger.trace("Закрываем сессию");
@@ -194,6 +193,34 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             session.close();
         }
 
+    }
+
+    public boolean findCuByIND(ConnectionUnit connectionUnit) {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceConnectionUnit.getSessionFactory().openSession();
+        logger.info("----------------------------------------");
+        logger.trace("Ищем ОКУ с параметрами: " + connectionUnit.toString());
+        Query query = session.createQuery("select count(*) from ConnectionUnit where node.nodeId = :nodeId and cuNumber = :cuNumber");
+        query.setParameter("nodeId", connectionUnit.getNode().getNodeId());
+        query.setParameter("cuNumber", connectionUnit.getCuNumber());
+        Long cnt = (Long)query.iterate().next();
+        if (cnt == 0 ) {
+            query.iterate().next();
+            logger.trace("ОКУ с даннымипараметрами не существует");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return false;
+        } else {
+            logger.trace("ОКУ с даннымипараметрами уже существует");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return true;
+        }
     }
 
     protected SessionFactory getSessionFactory() {
