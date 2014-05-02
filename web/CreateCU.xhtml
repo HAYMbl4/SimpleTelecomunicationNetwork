@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+    >
+
+<h:head>
+    <h:outputStylesheet library = "css" name = "block.css" />
+    <h:outputStylesheet library = "css" name = "createNode.css" />
+</h:head>
+<h:body>
+
+    <div id = "cuWrapper">
+
+        <h:form>
+            <h:commandButton class = "styleBut" value = "К списку узлов" action = "index" />
+        </h:form>
+
+        <h:form class = "#{cuBean.styleMess}" >
+            <h:outputText value="#{cuBean.resoultMess}" />
+        </h:form>
+
+        <h:form id = "cuInfo">
+
+            <fieldset>
+                <legend>Узел: </legend>
+                    <table>
+                        <tr>
+                            <td>Наименования узла: </td>
+                            <td><h:inputText styleClass = "mastWrite" lable = "nodeName" value = "#{cuBean.nodeNameById}" disabled = "true" /></td>
+                        </tr>
+                    </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>Данные по ОКУ: </legend>
+                <table>
+                    <tr>
+                        <td>Номер ОКУ: </td>
+                        <td>
+                            <h:inputText styleClass = "mastWrite" lable = "cuNumber" value = "#{cuBean.cuNumber}" requires = "true">
+                                <f:validateLength minimum="1" maximum="256" />
+                            </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Начальная пара: </td>
+                        <td>
+                            <h:inputText styleClass = "mastWrite" lable = "firstPair" value = "#{cuBean.firstPair}" requires = "true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Емкость: </td>
+                        <td>
+                            <h:inputText styleClass = "mastWrite" lable = "capacity" value = "#{cuBean.capacity}" requires = "true" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <h:commandButton value = "Создать" action = "#{cuBean.createConnectionUnit}">
+                <f:param name = "nodeId" value = "#{cuBean.nodeId}" />
+            </h:commandButton>
+            <h:commandButton value = "Очистить" action = "#{cuBean.cleanParam}">
+                <f:param name = "nodeId" value = "#{cuBean.nodeId}" />
+            </h:commandButton>
+
+        </h:form>
+
+    </div>
+
+</h:body>
+</html>
