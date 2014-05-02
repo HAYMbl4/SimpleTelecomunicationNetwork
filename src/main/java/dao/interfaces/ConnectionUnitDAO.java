@@ -17,6 +17,7 @@ public interface ConnectionUnitDAO {
     ConnectionUnit getCuByCuId(Long cuId);
     boolean findCuByIND(ConnectionUnit connectionUnit);
     void createConnectionUnit(ConnectionUnit connectionUnit);
+    boolean findStubLinkByCU(ConnectionUnit connectionUnit);
     void deleteConnectionUnit(ConnectionUnit connectionUnit);
 
 }
