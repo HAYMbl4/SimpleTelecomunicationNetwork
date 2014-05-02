@@ -195,6 +195,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
 
     }
 
+    // используется перед созданием ОКУ, для проверки, на существование такого ОКУ
     public boolean findCuByIND(ConnectionUnit connectionUnit) {
 
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
@@ -216,6 +217,33 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
             return false;
         } else {
             logger.trace("ОКУ с даннымипараметрами уже существует");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return true;
+        }
+    }
+
+    // используется перед удалением ОКУ, для проверки наличия подключений
+    public boolean findStubLinkByCU(ConnectionUnit connectionUnit) {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceConnectionUnit.getSessionFactory().openSession();
+        logger.info("----------------------------------------");
+        logger.trace("Проверяем есть ли подключения для ОКУ: " + connectionUnit.toString());
+        Query query = session.createQuery("select count(*) from StubLink where connectionUnit.cuId = :cuId");
+        query.setParameter("cuId", connectionUnit.getCuId());
+        Long cnt = (Long) query.iterate().next();
+        if (cnt == 0) {
+            logger.trace("Для данного ОКУ подключений нет");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return false;
+        } else {
+            logger.trace("У данного ОКУ есть подключения");
             logger.info("----------------------------------------");
             logger.trace("Закрываем сессию");
             session.close();
