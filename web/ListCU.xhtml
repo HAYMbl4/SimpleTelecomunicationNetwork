@@ -5,6 +5,17 @@
 <h:head>
     <h:outputStylesheet library = "css" name = "tableStyle.css" />
     <h:outputStylesheet library = "css" name = "block.css" />
+    <h:outputStylesheet library = "css" name = "createNode.css" />
+    <h:outputScript library = "js" name = "jquery-1.7.1.js" />
+
+    <script type="text/javascript">
+        $(function(){
+            $('#hideMess').click(function(){
+                $(this).fadeOut(1500);
+            });
+        })
+    </script>
+
 </h:head>
 
 <h:body>
@@ -13,6 +24,13 @@
 
         <h:form>
             <h:commandButton class = "styleBut" value = "К списку узлов" action = "index" />
+            <h:commandButton class = "styleBut" value = "Создать ОКУ" action = "CreateCU" >
+                <f:param name = "nodeId" value = "#{cuBean.nodeId}" />
+            </h:commandButton>
+        </h:form>
+
+        <h:form id = "hideMess" class = "#{cuBean.styleMess}" >
+            <h:outputText value="#{cuBean.delMess}" />
         </h:form>
 
         <div id = "cuTitle">
@@ -59,7 +77,11 @@
                                 <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
                             </h:link>
                         </li>
-
+                        <li>
+                            <h:commandLink value = "Удалить" action = "#{cuBean.deleteConnectionUnit(cu.connectionUnit)}">
+                                <f:param name = "nodeId" value = "#{cu.connectionUnit.node.nodeId}" />
+                            </h:commandLink>
+                        </li>
                     </ul>
                 </h:column>
 
