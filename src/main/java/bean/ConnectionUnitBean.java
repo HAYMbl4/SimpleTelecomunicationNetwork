@@ -65,12 +65,27 @@ public class ConnectionUnitBean implements Serializable {
         ConnectionUnit connectionUnit = new ConnectionUnit(serviceNode.getNodeById(nodeId),cuNumber,firstPair,capacity);
         if (serviceConnectionUnit.findCuByIND(connectionUnit)) {
             resoultMess = "ОКУ с такими параметрами уже есть!";
-            styleMess = "createNodeError";
+            styleMess = "standartMessError";
         } else {
             serviceConnectionUnit.createConnectionUnit(connectionUnit);
             resoultMess = "ОКУ успешно создано";
-            styleMess = "createNode";
+            styleMess = "standartMess";
         }
+    }
+
+    public void deleteConnectionUnit(ConnectionUnit connectionUnit) {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        if (serviceConnectionUnit.findStubLinkByCU(connectionUnit)) {
+            delMess = "У ОКУ \"" + connectionUnit.getNode().getNodeType().getNodeTypeShortName() + "-" + connectionUnit.getNode().getNodeName() +
+                    "-" + connectionUnit.getCuNumber() + "\" есть подключения, нельзя удалить данный объект";
+            styleMess = "standartMessError";
+        } else {
+            serviceConnectionUnit.deleteConnectionUnit(connectionUnit);
+            delMess = "ОКУ \"" + connectionUnit.getNode().getNodeType().getNodeTypeShortName() + "-" + connectionUnit.getNode().getNodeName() + "\" успешно удалено";
+            styleMess = "standartMess";
+        }
+
     }
 
     public void cleanParam() {
