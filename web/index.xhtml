@@ -117,6 +117,11 @@
                             </h:link>
                         </li>
                         <li>
+                            <h:link value = "Подкл.(Груп-ка)" outcome = "NodeGroupCableLink">
+                                <f:param name = "nodeId" value = "#{n.nodeId}" />
+                            </h:link>
+                        </li>
+                        <li>
                             <h:commandLink value = "Удалить" action = "#{nodeBean.deleteNode}" >
                                 <f:param name = "nodeId" value = "#{n.nodeId}" />
                             </h:commandLink>
