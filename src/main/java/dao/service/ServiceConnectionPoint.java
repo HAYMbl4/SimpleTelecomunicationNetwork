@@ -24,6 +24,7 @@ public class ServiceConnectionPoint implements ConnectionPointDAO {
 
     private static final Logger logger = LoggerFactory.getLogger("progTrace");
 
+    // используется в ServiceCU для удаляения ОКУ
     public List<ConnectionPoint> getListConnectionPointByCuId(Long cuId) {
 
         ServiceConnectionPoint sCP = new ServiceConnectionPoint();

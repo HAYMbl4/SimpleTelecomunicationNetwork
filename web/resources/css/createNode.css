@@ -15,14 +15,14 @@
     visibility: hidden;
 }
 
-.createNode{
+.standartMess{
     width: 812px;
     background-color: #4cff8d;
     padding: 4px;
     text-align: center;
 }
 
-.createNodeError{
+.standartMessError{
     width: 812px;
     background-color: #ff696d;
     padding: 4px;

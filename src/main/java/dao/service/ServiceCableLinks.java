@@ -60,7 +60,7 @@ public class ServiceCableLinks implements CableLinksDAO {
                     stubLink = cl.getStubLink();
                     linkedStubLink = cl.getLinkedStubLink();
                     logger.trace(stubLink.toString() + " - " + linkedStubLink.toString());
-                    cableLinkTableList.add(new CableLinkTable(stubLink, linkedStubLink));
+                    cableLinkTableList.add(new CableLinkTable(stubLink,linkedStubLink,stubLink.getConnectionPoint().getCpName(),linkedStubLink.getConnectionPoint().getCpName()));
                 }
             }
 
@@ -77,7 +77,7 @@ public class ServiceCableLinks implements CableLinksDAO {
                     stubLink = cl.getLinkedStubLink();
                     linkedStubLink = cl.getStubLink();
                     logger.trace(stubLink.toString() + " - " + linkedStubLink.toString());
-                    cableLinkTableList.add(new CableLinkTable(stubLink,linkedStubLink));
+                    cableLinkTableList.add(new CableLinkTable(stubLink,linkedStubLink,stubLink.getConnectionPoint().getCpName(),linkedStubLink.getConnectionPoint().getCpName()));
                 }
             }
         }
@@ -130,7 +130,7 @@ public class ServiceCableLinks implements CableLinksDAO {
                     stubLink = cl.getStubLink();
                     linkedStubLink = cl.getLinkedStubLink();
                     logger.trace(stubLink.toString() + " - " + linkedStubLink.toString());
-                    cableLinkTableList.add(new CableLinkTable(stubLink, linkedStubLink));
+                    cableLinkTableList.add(new CableLinkTable(stubLink,linkedStubLink,stubLink.getConnectionPoint().getCpName(),linkedStubLink.getConnectionPoint().getCpName()));
                 }
             }
 
@@ -147,7 +147,7 @@ public class ServiceCableLinks implements CableLinksDAO {
                     stubLink = cl.getLinkedStubLink();
                     linkedStubLink = cl.getStubLink();
                     logger.trace(stubLink.toString() + " - " + linkedStubLink.toString());
-                    cableLinkTableList.add(new CableLinkTable(stubLink,linkedStubLink));
+                    cableLinkTableList.add(new CableLinkTable(stubLink,linkedStubLink,stubLink.getConnectionPoint().getCpName(),linkedStubLink.getConnectionPoint().getCpName()));
                 }
             }
         }

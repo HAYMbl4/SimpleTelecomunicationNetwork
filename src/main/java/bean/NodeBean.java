@@ -67,13 +67,13 @@ public class NodeBean implements Serializable {
         try {
             serviceNode.createNode(new Node (nodeName, nodeType, region, street, house, nodeNote));
             resoultMess = "Узел успешно создан";
-            styleMess = "createNode";
+            styleMess = "standartMess";
         } catch (ConstraintViolationException ex) {
             resoultMess = "Узел с такими параметрами уже есть!";
-            styleMess = "createNodeError";
+            styleMess = "standartMessError";
         } catch (Exception ex) {
             resoultMess = "ошибка";
-            styleMess = "createNodeError";
+            styleMess = "standartMessError";
         }
 
         System.out.println(resoultMess);
@@ -82,7 +82,6 @@ public class NodeBean implements Serializable {
     public void deleteNode() {
 
         ServiceNode serviceNode = new ServiceNode();
-        System.out.println("--------------------------------------------------------------------- " + nodeId);
         Node node = serviceNode.getNodeById(nodeId);
         Long cntCu = serviceNode.cntCUinNode(node.getNodeId());
 

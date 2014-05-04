@@ -54,11 +54,11 @@ public class ServiceNode implements NodeDAO {
     // Используется в nodeBean, для получения списка узлов, по конкретному типу узла
     public List<Node> getNodeByNodeTypeName(String nodeTypeName) {
 
-        ServiceNodeType serviceNodeType = new ServiceNodeType();
+        ServiceNode serviceNode = new ServiceNode();
 
         logger.info("----------------------------------------");
         logger.trace("Открываем сессию");
-        Session session = serviceNodeType.getSessionFactory().openSession();
+        Session session = serviceNode.getSessionFactory().openSession();
 
         logger.info("----------------------------------------");
         logger.trace("Получаем список узлов по типу: " + nodeTypeName);
@@ -128,17 +128,18 @@ public class ServiceNode implements NodeDAO {
 
     public void deleteNode(Node node) {
 
-        ServiceNode serviceNode = new ServiceNode();
-
-        logger.info("----------------------------------------");
-        logger.trace("Открываем сессию");
-        Session session = serviceNode.getSessionFactory().openSession();
-        session.beginTransaction();
-        logger.info("----------------------------------------");
-        logger.trace("Удаляем запись из таблице NODE: ");
-        logger.trace(node.toString());
+        Session session = null;
 
         try {
+            ServiceNode serviceNode = new ServiceNode();
+
+            logger.info("----------------------------------------");
+            logger.trace("Открываем сессию");
+            session = serviceNode.getSessionFactory().openSession();
+            session.beginTransaction();
+            logger.info("----------------------------------------");
+            logger.trace("Удаляем запись из таблице NODE: ");
+            logger.trace(node.toString());
             session.delete(node);
             session.getTransaction().commit();
             logger.info("----------------------------------------");

@@ -148,11 +148,11 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
                 session.save(connectionPoint);
             }
             session.getTransaction().commit();
-            System.out.println("commit");
         } catch (Exception ex) {
             logger.trace("Ошибка при создании ОКУ: ", ex);
             session.getTransaction().rollback();
             ex.printStackTrace();
+            session.close();
         } finally {
             logger.info("----------------------------------------");
             logger.trace("Закрываем сессию");
@@ -187,6 +187,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         } catch (Exception ex) {
             session.getTransaction().rollback();
             logger.trace("При удалении ОКУ возникли ошибки: ", ex);
+            session.close();
         } finally {
             logger.info("----------------------------------------");
             logger.trace("Закрываем сессию");
@@ -236,6 +237,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         Query query = session.createQuery("select count(*) from StubLink where connectionUnit.cuId = :cuId");
         query.setParameter("cuId", connectionUnit.getCuId());
         Long cnt = (Long) query.iterate().next();
+        System.out.println(" ------------------------------------------------------------------------------ findStubLinkByCU");
         if (cnt == 0) {
             logger.trace("Для данного ОКУ подключений нет");
             logger.info("----------------------------------------");
