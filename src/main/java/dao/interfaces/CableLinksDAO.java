@@ -1,5 +1,6 @@
 package dao.interfaces;
 
+import entity.view.CableLinkGroup;
 import entity.view.CableLinkTable;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface CableLinksDAO {
 
     List<CableLinkTable> getCableLinksByNodeId(Long nodeId);
     List<CableLinkTable> getCableLinksByCuId(Long cuId);
+    List<CableLinkGroup> getCableLinkGroupByNode(Long nodeId);
+    List<CableLinkGroup> getCableLinkGroupByCU(Long cuId);
 
 }
