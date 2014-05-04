@@ -5,6 +5,7 @@ import dao.service.ServiceConnectionUnit;
 import dao.service.ServiceNode;
 import entity.mapping.ConnectionUnit;
 import entity.mapping.Node;
+import entity.view.CableLinkGroup;
 import entity.view.CableLinkTable;
 
 import javax.faces.bean.ManagedBean;
@@ -51,6 +52,16 @@ public class CableLinkBean implements Serializable {
         ConnectionUnit connectionUnit = serviceConnectionUnit.getCuByCuId(cuId);
         return connectionUnit.getNode().getNodeType().getNodeTypeShortName() + connectionUnit.getNode().getNodeName() + "-" +
                 connectionUnit.getCuNumber();
+    }
+
+    public List<CableLinkGroup> getListGroupCableLinkByNode() {
+        ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
+        return serviceCableLinks.getCableLinkGroupByNode(nodeId);
+    }
+
+    public List<CableLinkGroup> getListGroupCableLinkByCU() {
+        ServiceCableLinks serviceCableLinks = new ServiceCableLinks();
+        return serviceCableLinks.getCableLinkGroupByCU(cuId);
     }
 
     public Long getNodeId() {

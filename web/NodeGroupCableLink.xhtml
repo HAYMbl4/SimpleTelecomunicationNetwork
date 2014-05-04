@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <h:outputStylesheet library = "css" name = "tableStyle.css" />
+    <h:outputStylesheet library = "css" name = "block.css" />
+</h:head>
+
+<h:body>
+
+    <div id = "cuWrapper">
+
+        <h:form>
+            <h:commandButton class = "styleBut" value = "К списку узлов" action = "index" />
+        </h:form>
+
+        <div id = "cuTitle">
+            <h:title>Перечень подключений для узла: #{clBean.nodeNameById}</h:title>
+        </div>
+
+        <h:form id = "cuInfo">
+
+            <h:dataTable value = "#{clBean.listGroupCableLinkByNode}" var = "cl"
+                         styleClass  = "order-table"
+                         headerClass = "order-table-header"
+                         rowClasses  = "order-table-odd-row,order-table-even-row"
+                    >
+
+                <h:column>
+                    <f:facet name = "header">Исходящий узел</f:facet>
+                    #{cl.nodeName}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">ОКУ</f:facet>
+                    #{cl.cuName}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Точки</f:facet>
+                    #{cl.firstCpName}..#{cl.endCpName}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Входящий узел</f:facet>
+                    #{cl.linkedNodeName}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">ОКУ</f:facet>
+                    #{cl.linkedCuName}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Точки</f:facet>
+                    #{cl.linkedFirstCpName}..#{cl.linkedEndCpName}
+                </h:column>
+
+            </h:dataTable>
+
+        </h:form>
+
+    </div>
+
+</h:body>
+</html>
