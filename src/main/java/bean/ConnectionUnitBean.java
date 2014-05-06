@@ -77,8 +77,7 @@ public class ConnectionUnitBean implements Serializable {
 
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
         if (serviceConnectionUnit.findStubLinkByCU(connectionUnit)) {
-            delMess = "У ОКУ \"" + connectionUnit.getNode().getNodeType().getNodeTypeShortName() + "-" + connectionUnit.getNode().getNodeName() +
-                    "-" + connectionUnit.getCuNumber() + "\" есть подключения, нельзя удалить данный объект";
+            delMess = "У ОКУ \"" + connectionUnit.getNode().getNodeType().getNodeTypeShortName() + "-" + connectionUnit.getNode().getNodeName() + "\" есть подключения, нельзя удалить данный объект";
             styleMess = "standartMessError";
         } else {
             serviceConnectionUnit.deleteConnectionUnit(connectionUnit);

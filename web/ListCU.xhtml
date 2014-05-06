@@ -73,6 +73,16 @@
                 <h:column>
                     <ul>
                         <li>
+                            <h:link value = "Точки" outcome = "ListCP">
+                                <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value = "Создать подкл." outcome = "BeforeCreateCableLink">
+                                <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
+                            </h:link>
+                        </li>
+                        <li>
                             <h:link value = "Подключения" outcome = "CuCableLink">
                                 <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
                             </h:link>

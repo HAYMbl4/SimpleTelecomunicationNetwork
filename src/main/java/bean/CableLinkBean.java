@@ -64,6 +64,16 @@ public class CableLinkBean implements Serializable {
         return serviceCableLinks.getCableLinkGroupByCU(cuId);
     }
 
+    public List<ConnectionUnit> getListConnectionUnit() {
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        return serviceConnectionUnit.getListConnectionUnit();
+    }
+
+    public ConnectionUnit getCuById() {
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        return serviceConnectionUnit.getCuByCuId(cuId);
+    }
+
     public Long getNodeId() {
         return nodeId;
     }
