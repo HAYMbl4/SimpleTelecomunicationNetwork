@@ -14,7 +14,7 @@ import java.util.List;
 public class StubLink implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_STUB_LINK")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_STUB_LINK")
     @SequenceGenerator(name = "GEN_STUB_LINK", sequenceName = "GEN_STUB_LINK", allocationSize = 1)
     @Column(name = "stub_link_id")
     private Long stubLinkId;
