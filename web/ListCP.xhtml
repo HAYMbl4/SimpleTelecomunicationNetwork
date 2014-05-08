@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <h:outputStylesheet library = "css" name = "tableStyle.css" />
+    <h:outputStylesheet library = "css" name = "block.css" />
+</h:head>
+
+<h:body>
+
+    <div id = "cuWrapper">
+
+        <h:form>
+            <h:commandButton class = "styleBut" value = "К списку узлов" action = "index" />
+        </h:form>
+
+        <h:form id = "cuInfo">
+
+            <h:dataTable value = "#{cpBean.listConnectionPoint}" var = "cp"
+                         styleClass  = "order-table"
+                         headerClass = "order-table-header"
+                         rowClasses  = "order-table-odd-row,order-table-even-row"
+                    >
+
+                <h:column>
+                    <f:facet name = "header">Точка</f:facet>
+                    #{cp.connectionPoint.cpName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Коннектор</f:facet>
+                    <h:selectBooleanCheckbox value="#{cp.selected}" />
+                </h:column>
+
+            </h:dataTable>
+
+            <h:commandButton value="Что выбрано" action="#{cpBean.getSelectedRow}" />
+
+        </h:form>
+    </div>
+
+</h:body>
+
+</html>
