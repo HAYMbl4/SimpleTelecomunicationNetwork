@@ -16,6 +16,5 @@ public interface CableLinksDAO {
     List<CableLinkTable> getCableLinksByCuId(Long cuId);
     List<CableLinkGroup> getCableLinkGroupByNode(Long nodeId);
     List<CableLinkGroup> getCableLinkGroupByCU(Long cuId);
-    void createCableLink(Long cpId, long linkedCpId);
 
 }
