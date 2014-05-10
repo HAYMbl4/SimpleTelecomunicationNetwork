@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+
+</h:head>
+    <h:outputStylesheet library = "css" name = "tableStyle.css" />
+    <h:outputStylesheet library = "css" name = "block.css" />
+<h:body>
+    <div id = "wrapper">
+
+    <h:form id = "navigate-small">
+        <h:dataTable value = "#{clBean.cuById}" var = "cu"
+                     styleClass = "table-small"
+                     headerClass = "order-table-header"
+                     rowClasses = "order-table-odd-row,order-table-even-row"
+                >
+
+            <h:column>
+                <f:facet name = "header">Узел</f:facet>
+                #{cu.node.nodeType.nodeTypeShortName} - #{cu.node.nodeName}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">ОКУ</f:facet>
+                #{cu.cuNumber}
+            </h:column>
+
+        </h:dataTable>
+    </h:form>
+
+    <h:form id = "nodeInfo">
+        <h:dataTable value = "#{clBean.listConnectionUnit}" var = "lcu"
+                     styleClass = "order-table"
+                     headerClass = "order-table-header"
+                     rowClasses = "order-table-odd-row,order-table-even-row"
+                >
+
+        <h:column>
+            <f:facet name = "header">Узел</f:facet>
+            #{lcu.node.nodeType.nodeTypeShortName}-#{lcu.node.nodeName}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">ОКУ</f:facet>
+            #{lcu.cuNumber}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">Выберите ОКУ</f:facet>
+                <h:commandLink value = "Выбрать" action = "#{cuBean.deleteConnectionUnit(cu.connectionUnit)}">
+                    <f:param name = "nodeId" value = "#{cu.connectionUnit.node.nodeId}" />
+                </h:commandLink>
+        </h:column>
+
+
+        </h:dataTable>
+    </h:form>
+
+    </div>
+</h:body>
+</html>
