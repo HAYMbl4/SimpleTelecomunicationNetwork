@@ -323,7 +323,7 @@ INSERT INTO INV_OPERATION_TEXT (TABLE_NAME, ACTION, SCRIPT)
   lcp.cp_name as "linkedFirstCpName",
   lcp.cp_name as "linkedEndCpName"
 FROM cable_link cl,
-  stu b_link sl,
+  stub_link sl,
   stub_link lsl,
   connection_point cp,
   connection_point lcp,
@@ -388,7 +388,7 @@ INSERT INTO INV_OPERATION_TEXT (TABLE_NAME, ACTION, SCRIPT)
   lcp.cp_name as "linkedFirstCpName",
   lcp.cp_name as "linkedEndCpName"
 FROM cable_link cl,
-  stu b_link sl,
+  stub_link sl,
   stub_link lsl,
   connection_point cp,
   connection_point lcp,
