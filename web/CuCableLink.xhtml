@@ -13,6 +13,9 @@
 
         <h:form>
             <h:commandButton class = "styleBut" value = "К списку узлов" action = "index" />
+            <h:commandButton class = "styleBut" value = "К списку ОКУ" action = "ListCU">
+                <f:param name = "nodeId" value = "#{clBean.nodeId}" />
+            </h:commandButton>
         </h:form>
 
         <div id = "cuTitle">

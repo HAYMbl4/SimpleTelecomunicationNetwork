@@ -1,11 +1,10 @@
 package bean;
 
+import dao.service.ServiceConnectionUnit;
 import dao.service.ServiceNode;
 import entity.mapping.ConnectionUnit;
-import dao.service.ServiceConnectionUnit;
 import entity.mapping.Node;
 import entity.view.ConnectionUnitTable;
-import org.hibernate.exception.ConstraintViolationException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -52,6 +51,7 @@ public class ConnectionUnitBean implements Serializable {
 
     public String getNodeNameById() {
         ServiceNode serviceNode = new ServiceNode();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - nodeId = " + nodeId);
         Node node = serviceNode.getNodeById(nodeId);
         return node.getNodeType().getNodeTypeShortName()+node.getNodeName();
     }

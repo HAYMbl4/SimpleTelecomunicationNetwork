@@ -75,11 +75,13 @@
                         <li>
                             <h:link value = "Подключения" outcome = "CuCableLink">
                                 <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
+                                <f:param name = "nodeId" value = "#{cu.connectionUnit.node.nodeId}" />
                             </h:link>
                         </li>
                         <li>
                             <h:link value = "Подкл.(Груп-ка)" outcome = "CuGroupCableLink">
                                 <f:param name = "cuId" value = "#{cu.connectionUnit.cuId}" />
+                                <f:param name = "nodeId" value = "#{cu.connectionUnit.node.nodeId}" />
                             </h:link>
                         </li>
                         <li>
