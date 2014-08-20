@@ -5,6 +5,13 @@
     margin: auto;
 }
 
+.table-small {
+    border-collapse: collapse;
+    width: 300px;
+    border: 1px solid grey;
+    margin: auto;
+}
+
 .order-table-header {
     text-align: center;
     background: #E5E5E5;

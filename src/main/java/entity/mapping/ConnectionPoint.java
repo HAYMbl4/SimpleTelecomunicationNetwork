@@ -12,17 +12,17 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "connection_point")
+@Table(name = "connection_point", uniqueConstraints = @UniqueConstraint(columnNames = {"cu_id", "cp_name"}))
 public class ConnectionPoint implements Serializable {
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GEN_CP")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_CP")
     @SequenceGenerator(name = "GEN_CP", sequenceName = "GEN_CP", allocationSize = 1)
     @Column(name = "cp_id")
     private Long cpId;
 
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, targetEntity = ConnectionUnit.class)
-    @JoinColumn(name = "cu_id")
+    @JoinColumn(name = "cu_id", nullable = false)
     private ConnectionUnit connectionUnit;
 
     @Column(name = "cp_name", nullable = false)

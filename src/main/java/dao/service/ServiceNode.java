@@ -23,6 +23,7 @@ public class ServiceNode implements NodeDAO {
 
     private static final Logger logger = LoggerFactory.getLogger("progTrace");
 
+    // Используется в nodeBean, для получения списка узлов, когда выбран параметр "All"
     public List<Node> getListNode() {
 
         ServiceNode sn = new ServiceNode();
@@ -50,13 +51,14 @@ public class ServiceNode implements NodeDAO {
         return nodeList;
     }
 
+    // Используется в nodeBean, для получения списка узлов, по конкретному типу узла
     public List<Node> getNodeByNodeTypeName(String nodeTypeName) {
 
-        ServiceNodeType serviceNodeType = new ServiceNodeType();
+        ServiceNode serviceNode = new ServiceNode();
 
         logger.info("----------------------------------------");
         logger.trace("Открываем сессию");
-        Session session = serviceNodeType.getSessionFactory().openSession();
+        Session session = serviceNode.getSessionFactory().openSession();
 
         logger.info("----------------------------------------");
         logger.trace("Получаем список узлов по типу: " + nodeTypeName);
@@ -76,6 +78,7 @@ public class ServiceNode implements NodeDAO {
         return nodeList;
     }
 
+    // используется в cuBean, для формирования Наименования узла
     public Node getNodeById(Long nodeId) {
 
         ServiceNode serviceNode = new ServiceNode();
@@ -98,6 +101,81 @@ public class ServiceNode implements NodeDAO {
 
         return node;
 
+    }
+
+    public void createNode(Node node) {
+
+        ServiceNode serviceNode = new ServiceNode();
+
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceNode.getSessionFactory().openSession();
+        session.beginTransaction();
+        logger.info("----------------------------------------");
+        logger.trace("Создаем запись в таблице NODE, с парметрами: ");
+        logger.info(node.toString());
+        session.save(node);
+        session.getTransaction().commit();
+
+        logger.info("----------------------------------------");
+        logger.trace("Операция прошла успешно");
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
+
+    }
+
+    public void deleteNode(Node node) {
+
+        Session session = null;
+
+        try {
+            ServiceNode serviceNode = new ServiceNode();
+
+            logger.info("----------------------------------------");
+            logger.trace("Открываем сессию");
+            session = serviceNode.getSessionFactory().openSession();
+            session.beginTransaction();
+            logger.info("----------------------------------------");
+            logger.trace("Удаляем запись из таблице NODE: ");
+            logger.trace(node.toString());
+            session.delete(node);
+            session.getTransaction().commit();
+            logger.info("----------------------------------------");
+            logger.trace("Операция прошла успешно");
+        } catch (Exception ex) {
+            logger.info("----------------------------------------");
+            logger.trace("Возникла ошибка: ", ex);
+            session.getTransaction().rollback();
+        } finally {
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+        }
+    }
+
+    // используется в nodeBean для проверки наличия у узла ОКУ, перед удалением
+    public Long cntCUinNode(Long nodeId) {
+
+        ServiceNode serviceNode = new ServiceNode();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceNode.getSessionFactory().openSession();
+
+        logger.info("----------------------------------------");
+        logger.trace("Выполняем запрос на получения кол-ва ОКУ, которые есть в узле с ID = " + nodeId);
+        Query query = session.createQuery("select count(*) from ConnectionUnit where node.nodeId = :nodeId");
+        query.setParameter("nodeId", nodeId);
+        Long cntCu = (Long) query.iterate().next();
+        logger.trace("У узла есть " + cntCu + " ОКУ");
+        System.out.println("У узла есть " + cntCu + " ОКУ");
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
+
+        return cntCu;
     }
 
     protected SessionFactory getSessionFactory() {

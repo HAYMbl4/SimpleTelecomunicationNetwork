@@ -24,6 +24,7 @@ public class ServiceConnectionPoint implements ConnectionPointDAO {
 
     private static final Logger logger = LoggerFactory.getLogger("progTrace");
 
+    // используется в ServiceCU для удаляения ОКУ
     public List<ConnectionPoint> getListConnectionPointByCuId(Long cuId) {
 
         ServiceConnectionPoint sCP = new ServiceConnectionPoint();
@@ -79,6 +80,28 @@ public class ServiceConnectionPoint implements ConnectionPointDAO {
 
         return usedCp;
 
+    }
+
+    public ConnectionPoint getConnectionPointByCpId(Long cpId) {
+
+        ServiceConnectionPoint serviceConnectionPoint = new ServiceConnectionPoint();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceConnectionPoint.getSessionFactory().openSession();
+
+        logger.info("----------------------------------------");
+        logger.trace("Ищем точку в таблице CONNECTION_POINT, по ID = " + cpId);
+        Query query = session.createQuery("from ConnectionPoint where cpId = :cpId");
+        query.setParameter("cpId", cpId);
+        ConnectionPoint connectionPoint = (ConnectionPoint) query.iterate().next();
+        logger.trace("Точка найдена: " + connectionPoint.toString());
+        System.out.println("Точка найдена: " + connectionPoint.toString());
+
+        logger.info("----------------------------------------");
+        logger.trace("Закрываем сессию");
+        session.close();
+
+        return connectionPoint;
     }
 
     protected SessionFactory getSessionFactory() {

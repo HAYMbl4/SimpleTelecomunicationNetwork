@@ -19,7 +19,7 @@ public class TestRunner {
         ServiceNode servNode = new ServiceNode();
 //        servNode.getListNode();
 
-        servNode.getNodeByNodeTypeName("Case");
+//        servNode.getNodeByNodeTypeName("Case");
 
 //        ServiceConnectionUnit servCU = new ServiceConnectionUnit();
 //        servCU.getListConnectionUnit();
@@ -34,11 +34,12 @@ public class TestRunner {
 //
 //        servCU.getConnectionUnitByNode(2L);
 
-//        ServiceConnectionPoint servCP = new ServiceConnectionPoint();
+        ServiceConnectionPoint servCP = new ServiceConnectionPoint();
 //        servCP.getConnectionPointList();
+//        servCP.getConnectionPointByCpId(1L);
 
         ServiceStubLink serviceStubLink = new ServiceStubLink();
-
+        serviceStubLink.createStubLink(149L);
 //        serviceStubLink.getStubLinksByCuId(2L);
 //        Long slId = serviceStubLink.getStubLinkIdByCpId(102L);
 //        serviceStubLink.getStubLinkByStubLinkId(slId);

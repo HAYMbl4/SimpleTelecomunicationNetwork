@@ -1,6 +1,7 @@
 package dao.service;
 
 import dao.interfaces.ConnectionUnitDAO;
+import entity.mapping.ConnectionPoint;
 import entity.mapping.ConnectionUnit;
 import entity.mapping.Node;
 import org.hibernate.Query;
@@ -47,6 +48,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cuList;
     }
 
+    // используется в cuBean для получения списка ОКУ по конкретному узлу
     public List<ConnectionUnit> getConnectionUnitByNode(Long nodeId) {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
@@ -72,6 +74,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cuList;
     }
 
+    // используется в cuBean, для получения кол-ва используемых в ОКУ точек
     public Long getCntUsedCpByCu(Long cuId) {
 
         ServiceConnectionUnit sCU = new ServiceConnectionUnit();
@@ -97,6 +100,7 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         return cntUsedCp;
     }
 
+    // используется в clBean, для формирования наименования ОКУ, по которому выбираются подключения
     public ConnectionUnit getCuByCuId(Long cuId) {
 
         ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
@@ -118,6 +122,135 @@ public class ServiceConnectionUnit implements ConnectionUnitDAO {
         session.close();
 
         return connectionUnit;
+    }
+
+    public void createConnectionUnit(ConnectionUnit connectionUnit) {
+
+        Session session = null;
+
+        try {
+            ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+            logger.info("----------------------------------------");
+            logger.trace("Открываем сессию");
+            session = serviceConnectionUnit.getSessionFactory().openSession();
+            session.beginTransaction();
+            logger.info("----------------------------------------");
+            logger.trace("Создаем запись в таблице CONNECTION_UNIT, с параметрами: " + connectionUnit.toString());
+            System.out.println("Создаем запись в таблице CONNECTION_UNIT, с параметрами: " + connectionUnit.toString());
+            session.save(connectionUnit);
+            logger.info("----------------------------------------");
+            logger.trace("Для созданного ОКУ создаем точки:");
+            System.out.println("Для созданного ОКУ создаем точки:");
+            for (Long i = connectionUnit.getFirstPair(); i < connectionUnit.getFirstPair() + connectionUnit.getCapacity(); i++) {
+                ConnectionPoint connectionPoint = new ConnectionPoint(i,connectionUnit);
+                logger.trace(connectionPoint.toString());
+                System.out.println(connectionPoint.toString());
+                session.save(connectionPoint);
+            }
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            logger.trace("Ошибка при создании ОКУ: ", ex);
+            session.getTransaction().rollback();
+            ex.printStackTrace();
+            session.close();
+        } finally {
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+        }
+    }
+
+    public void deleteConnectionUnit(ConnectionUnit connectionUnit) {
+
+        Session session = null;
+
+        try {
+            ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+            logger.info("----------------------------------------");
+            logger.trace("Открываем сессию");
+            session = serviceConnectionUnit.getSessionFactory().openSession();
+            session.beginTransaction();
+            logger.info("----------------------------------------");
+            logger.trace("Удаляем точки ОКУ: ");
+            ServiceConnectionPoint serviceConnectionPoint = new ServiceConnectionPoint();
+            List<ConnectionPoint> connectionPointList = serviceConnectionPoint.getListConnectionPointByCuId(connectionUnit.getCuId());
+            for (int i = 0; i < connectionPointList.size(); i++) {
+                logger.trace(connectionPointList.get(i).toString());
+                session.delete(connectionPointList.get(i));
+            }
+            logger.info("----------------------------------------");
+            logger.trace("Удаляем сам коннектор: ");
+            session.delete(connectionUnit);
+            session.getTransaction().commit();
+            logger.info("----------------------------------------");
+            logger.trace("ОКУ удален успешно");
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            logger.trace("При удалении ОКУ возникли ошибки: ", ex);
+            session.close();
+        } finally {
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+        }
+
+    }
+
+    // используется перед созданием ОКУ, для проверки, на существование такого ОКУ
+    public boolean findCuByIND(ConnectionUnit connectionUnit) {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceConnectionUnit.getSessionFactory().openSession();
+        logger.info("----------------------------------------");
+        logger.trace("Ищем ОКУ с параметрами: " + connectionUnit.toString());
+        Query query = session.createQuery("select count(*) from ConnectionUnit where node.nodeId = :nodeId and cuNumber = :cuNumber");
+        query.setParameter("nodeId", connectionUnit.getNode().getNodeId());
+        query.setParameter("cuNumber", connectionUnit.getCuNumber());
+        Long cnt = (Long)query.iterate().next();
+        if (cnt == 0 ) {
+            query.iterate().next();
+            logger.trace("ОКУ с даннымипараметрами не существует");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return false;
+        } else {
+            logger.trace("ОКУ с даннымипараметрами уже существует");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return true;
+        }
+    }
+
+    // используется перед удалением ОКУ, для проверки наличия подключений
+    public boolean findStubLinkByCU(ConnectionUnit connectionUnit) {
+
+        ServiceConnectionUnit serviceConnectionUnit = new ServiceConnectionUnit();
+        logger.info("----------------------------------------");
+        logger.trace("Открываем сессию");
+        Session session = serviceConnectionUnit.getSessionFactory().openSession();
+        logger.info("----------------------------------------");
+        logger.trace("Проверяем есть ли подключения для ОКУ: " + connectionUnit.toString());
+        Query query = session.createQuery("select count(*) from StubLink where connectionUnit.cuId = :cuId");
+        query.setParameter("cuId", connectionUnit.getCuId());
+        Long cnt = (Long) query.iterate().next();
+        System.out.println(" ------------------------------------------------------------------------------ findStubLinkByCU");
+        if (cnt == 0) {
+            logger.trace("Для данного ОКУ подключений нет");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return false;
+        } else {
+            logger.trace("У данного ОКУ есть подключения");
+            logger.info("----------------------------------------");
+            logger.trace("Закрываем сессию");
+            session.close();
+            return true;
+        }
     }
 
     protected SessionFactory getSessionFactory() {
